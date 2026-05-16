@@ -1,364 +1,524 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kevin's Portfolio</title>
-  <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kevin Kipkorir — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
-  <header>
-    <nav>
-      <div class="hamburger">
-        <i class="fas fa-bars"></i>
-      </div>
-      <ul class="nav-links">
-        <li><a href="#about" class="active">About</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#certifications">Certifications</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
-  <!-- Hero section -->
-  <main>
-    <section id="about">
-      <div class="content-container">
-        <div class="profile-header">
-          <div class="profile-gallery">
-            <img src="https://img.freepik.com/free-photo/close-up-man-working-computer-chips_23-2150880924.jpg?ga=GA1.1.219115491.1743774814&semt=ais_hybrid&w=740" alt="lab" class="profile-pic active">
-            <img src="https://img.freepik.com/free-photo/3d-rendering-industry-40-concept_23-2149408312.jpg?ga=GA1.1.219115491.1743774814&semt=ais_hybrid&w=740" alt="industry" class="profile-pic">
-            <img src="https://img.freepik.com/free-vector/digital-global-connection-network-technology-background_1017-23324.jpg?ga=GA1.1.219115491.1743774814&semt=ais_hybrid&w=740" alt="tech" class="profile-pic">
-            <img src="https://img.freepik.com/free-photo/close-up-engineer-holding-printed-circuit-board_23-2149408313.jpg?ga=GA1.1.219115491.1743774814&semt=ais_hybrid&w=740" alt="circuit" class="profile-pic">
-            <img src="https://media.istockphoto.com/id/1467790914/es/foto/tecnolog%C3%ADa-en-la-nube-de-la-l%C3%ADnea-de-carga-ligera-de-velocidad.jpg?b=1&s=612x612&w=0&k=20&c=U2sd8DBETwUASIB_2fk7vFbX9PjK3WR_7j3I2FScwDw=" alt="circuit" class="profile-pic">
-            <div class="gallery-controls">
-              <button class="gallery-prev"><i class="fas fa-chevron-left"></i></button>
-              <button class="gallery-next"><i class="fas fa-chevron-right"></i></button>
-      </div>
+
+  <!-- ── SIDEBAR NAV ── -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <span class="logo-mark">KK</span>
     </div>
-          <div class="profile-text">
-            <h1>Hi, I'm Kevin Kipkorir</h1>
-            <h2>Embedded Systems, IoT & Cloud Engineer</h2>
-            <p>With a strong foundation in electrical and electronic engineering, I specialize in embedded systems, IoT, networking, and cloud computing. Passionate about innovation, I focus on building smart, connected solutions that enhance efficiency and bridge technological gaps. My expertise spans IoT device development, cloud integration, and network optimization, ensuring seamless connectivity between embedded systems and cloud platforms.</p>
-            <div class="specializations">
-              <span><i class="fas fa-cogs"></i> Embedded Systems</span>
-              <span><i class="fas fa-cloud"></i> Cloud Computing</span>
-              <span><i class="fas fa-satellite-dish"></i> RF Planning and Design</span>
-              <span><i class="fas fa-broadcast-tower"></i> Network Optimization</span>
-              <span><i class="fas fa-bolt"></i> 5G Deployment</span>
-              <span><i class="fas fa-network-wired"></i> Fiber Optic Systems</span>
-            <span><i class="fas fa-tools"></i> Troubleshooting</span>
+    <ul class="nav-links">
+      <li><a href="#hero"          class="nav-link active" data-section="hero">          <span class="nav-dot"></span><span class="nav-label">Home</span></a></li>
+      <li><a href="#about"         class="nav-link"        data-section="about">         <span class="nav-dot"></span><span class="nav-label">About</span></a></li>
+      <li><a href="#experience"    class="nav-link"        data-section="experience">    <span class="nav-dot"></span><span class="nav-label">Experience</span></a></li>
+      <li><a href="#projects"      class="nav-link"        data-section="projects">      <span class="nav-dot"></span><span class="nav-label">Projects</span></a></li>
+      <li><a href="#skills"        class="nav-link"        data-section="skills">        <span class="nav-dot"></span><span class="nav-label">Skills</span></a></li>
+      <li><a href="#certifications"class="nav-link"        data-section="certifications"><span class="nav-dot"></span><span class="nav-label">Certs</span></a></li>
+      <li><a href="#leadership"    class="nav-link"        data-section="leadership">    <span class="nav-dot"></span><span class="nav-label">Leadership</span></a></li>
+      <li><a href="#contact"       class="nav-link"        data-section="contact">       <span class="nav-dot"></span><span class="nav-label">Contact</span></a></li>
+    </ul>
+    <div class="sidebar-socials">
+      <a href="https://linkedin.com/in/kevinkip" target="_blank" title="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+      <a href="https://github.com/kevzkip" target="_blank" title="GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ── HAMBURGER ── -->
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <!-- ── MAIN CONTENT ── -->
+  <main class="main-content">
+
+    <!-- HERO -->
+    <section id="hero" class="section hero-section">
+      <canvas id="particles-canvas"></canvas>
+      <div class="hero-inner">
+        <p class="hero-eyebrow">Final Year · University of Nairobi</p>
+        <h1 class="hero-name">Kevin <span class="gold">Kipkorir</span></h1>
+        <p class="hero-title">Electrical &amp; Electronics Engineer</p>
+        <p class="hero-sub">NOC Operations · Embedded Systems · Cloud Infrastructure</p>
+        <div class="hero-ctas">
+          <a href="https://drive.google.com/file/d/1YX58i4suY5KmSMc4OLa7A6s5-v3QZWdK/view?usp=sharing" target="_blank" class="btn btn-primary">Download CV</a>
+          <a href="#contact" class="btn btn-ghost">Get In Touch</a>
+        </div>
+      </div>
+      <div class="scroll-indicator">
+        <span></span>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section about-section">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-tag">01</span>
+          <h2 class="section-title">About</h2>
+        </div>
+        <div class="about-grid">
+          <div class="about-text">
+            <p>I'm a final-year <span class="gold">Electrical &amp; Electronic Engineering</span> student at the University of Nairobi, with hands-on experience in telecom network operations at Huawei supporting live Safaricom infrastructure.</p>
+            <p>My work bridges hardware and software — from building LoRa-based embedded systems from scratch to monitoring production telecom platforms. I hold AWS Cloud Practitioner certification and am building toward cloud infrastructure and distributed systems engineering.</p>
+            <p>Currently finishing my BSc and actively looking for graduate roles in <span class="gold">cloud, networking, and telecoms engineering.</span></p>
+          </div>
+          <div class="about-stats">
+            <div class="stat-card glass">
+              <span class="stat-number gold">1</span>
+              <span class="stat-label">Industry Internship</span>
+              <span class="stat-sub">Huawei Kenya NOC</span>
             </div>
-            
+            <div class="stat-card glass">
+              <span class="stat-number gold">7+</span>
+              <span class="stat-label">Certifications</span>
+              <span class="stat-sub">AWS, IBM, MathWorks &amp; more</span>
+            </div>
+            <div class="stat-card glass">
+              <span class="stat-number gold">4×</span>
+              <span class="stat-label">Hackathon</span>
+              <span class="stat-sub">Huawei ICT Academy</span>
+            </div>
+            <div class="stat-card glass">
+              <span class="stat-number gold">2026</span>
+              <span class="stat-label">Graduation</span>
+              <span class="stat-sub">BSc EEE · UoN</span>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    
-    <section id="experience">
-      <div class="content-container">
-        <h1>Professional Experience</h1>
-        
+    <!-- EXPERIENCE -->
+    <section id="experience" class="section experience-section">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-tag">02</span>
+          <h2 class="section-title">Experience</h2>
+        </div>
         <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-date">2023 - Present</div>
-            <div class="timeline-content">
-              <h2>Embedded Systems & IoT Developer</h2>
-              <h3>Freelance</h3>
-              <ul>
-                <li>Developed AkiliSync, an AI-powered learning platform for coding and technical skills.</li>
-                <li>Designed IoT-based smart monitoring systems using ESP32, MQTT, and cloud dashboards.</li>
-                <li>Built real-time embedded applications with RTOS for microcontroller-based projects.</li>
-                <li>Worked with clients in RF planning tools (Atoll, Planet EV)</li>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-marker">
+              <div class="marker-dot"></div>
+              <div class="marker-line"></div>
+            </div>
+            <div class="timeline-card glass">
+              <div class="timeline-header">
+                <div>
+                  <h3 class="job-title">Network Operations Center &amp; Data Analysis Intern</h3>
+                  <p class="job-company"><span class="gold">Huawei Kenya</span> — Supporting Safaricom Live Infrastructure</p>
+                </div>
+                <span class="job-period">Jun 2025 – Nov 2025</span>
+              </div>
+              <ul class="job-bullets">
+                <li>Provided L1/L2 support for Safaricom, ensuring platform stability and 99.9% service availability through rigorous daily health checks of telecom analytics systems.</li>
+                <li>Monitored SmartCare/SEQ platforms and performed service health checks across live telecom environments.</li>
+                <li>Assisted in physical server installation and configuration within production network environments.</li>
+                <li>Utilized SQL and dashboards to generate KPI and CEM performance reports for incident triage and NOC troubleshooting.</li>
+                <li>Gained exposure to cloud-native infrastructure workflows including basic Kubernetes (kubectl) interaction for service inspection and monitoring in production.</li>
               </ul>
-            </div>
-          </div>
-          
-          <div class="timeline-item">
-            <div class="timeline-date">2023 - Present</div>
-            <div class="timeline-content">
-              <h2>IEEE Robotics and Automation Society Member</h2>
-              <h3>University of Nairobi Chapter</h3>
-              <ul>
-                <li>Engaged in robotics and embedded systems projects, applying automation concepts to real-world applications.</li>
-                <li>Collaborated with fellow engineers on IoT, AI, and embedded computing research.</li>
-                <li>Attended technical workshops and hackathons, enhancing skills in robotics, control systems, and embedded AI.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Education section -->
-    <section id="education">
-      <div class="content-container">
-        <h1>Education</h1>
-        <div class="education-item">
-          <i class="fas fa-university"></i>
-          <div>
-              <h2>University of Nairobi</h2>
-              <h3>BSc. Electrical & Electronic Engineering</h3>
-              <p class="date">2021 - Present | Honors</p>
-              <div class="coursework">
-                  <h4>Key Coursework:</h4>
-                  <ul>
-                      <li>Digital Communication Systems</li>
-                      <li>Optical Fiber Communications</li>
-                      <li>Wireless Networks</li>
-                      <li>Network Security & Cryptography</li>
-                      
-                  </ul>
-              </div>
-          </div>
-      </div>
-      
-      <div class="education-item">
-          <i class="fas fa-school"></i>
-          <div>
-              <h2>Kapsabet High School</h2>
-              <h3>Kenya Certificate of Secondary Education (KCSE)</h3>
-              <p class="date">2017 - 2020</p>
-              <div class="achievements">
-                  <h4>Achievements:</h4>
-                  <ul>
-                      <li>Graduated with top honors</li>
-                      <li>STEM Club Member – Electronics & Robotics</li>
-                      <li>Academic Mentor & Peer Tutor</li>
-                  </ul>
-              </div>
-          </div>
-      </div>
-      
-        </div>
-      </div>
-    </section>
-    <!-- Certifications section -->
-    <section id="certifications">
-      <div class="content-container">
-        <h1>Certifications</h1>
-        <div class="cert-grid">
-          <div class="cert-card">
-            <img src="https://img.freepik.com/premium-photo/licensed-succeed-professional-certifications_810293-104396.jpg?ga=GA1.1.219115491.1743774814&semt=ais_hybrid&w=740" alt="CCNA">
-            <h2>AWS CCP</h2>
-            <p>AWS Certified Cloud Practitioner</p>
-            <span class="date">2024</span>
-          </div>
-          <div class="cert-card">
-            <img src="https://img.freepik.com/free-photo/certified-approval-agreement-confirmation-concept_53876-120605.jpg?ga=GA1.1.219115491.1743774814&semt=ais_hybrid&w=740" alt="CWNE">
-            <h2>CCNA</h2>
-            <p>Cisco Certified Network Associate</p>
-            <span class="date">2023</span>
-          </div>
-          <div class="cert-card">
-            <img src="https://img.freepik.com/free-photo/certified-warranty-guarantee-insurance-assurance-concept_53876-127984.jpg?ga=GA1.1.219115491.1743774814&semt=ais_hybrid&w=740" alt="Network+">
-            <h2>IBM</h2>
-            <p>IBM Cybersecurity Analyst</p>
-            <span class="date">2024</span>
-          </div>
-          <div class="cert-card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYb5PEUGQiob1frF34e3Pkwy_c8Kxxs1lHWQ&s" alt="5G">
-            <h2>freeCodeCamp</h2>
-            <p>JavaScript Algorithms and Data Structures</p>
-            <span class="date">2022</span>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Projects section -->
-    <section id="projects">
-        <div class="content-container">
-          <h1>Featured Projects</h1>
-          <!-- Project cards1 -->
-          <div class="project-list">
-            <div class="project-item">
-              <i class="fas fa-laptop-code project-icon"></i>
-              <h2>Smart Learning App-AkiliSync</h2>
-              <p>An adaptive learning platform that personalizes content based on user progress and learning style.</p>
-              <div class="project-links">
-                <a href="https://github.com/kevzkip/AkiliSync" target="_blank">View Code</a>
-                <a href="https://github.com/kevzkip/AkiliSync" target="_blank">Live Demo</a>
+              <div class="job-tags">
+                <span class="tag">NOC/SOC</span>
+                <span class="tag">SmartCare/SEQ</span>
+                <span class="tag">SQL</span>
+                <span class="tag">KPI Reporting</span>
+                <span class="tag">Linux</span>
+                <span class="tag">Kubernetes</span>
               </div>
             </div>
-            <!-- Project cards2 -->
-            <div class="project-item">
-              <i class="fas fa-home project-icon"></i>
-              <h2>IoT Home Automation</h2>
-              <p>A custom home automation system using ESP32 and MQTT protocol for seamless device control.</p>
-              <div class="project-links">
-                <a href="https://github.com/kevzkip/4-DOF-Servo-Arm" target="_blank">View Code</a>
-                <a href="https://github.com/kevzkip/4-DOF-Servo-Arm" target="_blank">Live Demo</a>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-marker">
+              <div class="marker-dot"></div>
+            </div>
+            <div class="timeline-card glass">
+              <div class="timeline-header">
+                <div>
+                  <h3 class="job-title">BSc Electrical &amp; Electronic Engineering</h3>
+                  <p class="job-company"><span class="gold">University of Nairobi</span></p>
+                </div>
+                <span class="job-period">Sept 2021 – Sept 2026</span>
+              </div>
+              <p class="job-desc">Relevant coursework: Optical Communication Systems, Digital Communication Systems, Computer Communication Networks, Signal Theory &amp; Modulation, Microprocessors, Embedded Controllers, 5G Systems, Power Systems.</p>
+              <div class="job-tags">
+                <span class="tag">UON Coding Club</span>
+                <span class="tag">IEEE</span>
+                <span class="tag">ESA</span>
+                <span class="tag">Robotics &amp; Automation Society</span>
               </div>
             </div>
-            <!-- Project cards3 -->
-            <div class="project-item">
-              <i class="fas fa-traffic-light project-icon"></i>
-              <h2>Traffic Light Digital System</h2>
-              <p>Real-time operating system implementation for resource-constrained embedded microcontrollers.</p>
-              <div class="project-links">
-                <a href="https://github.com/kevzkip/arduino_LED_Traffic_Lights" target="_blank">View Code</a>
-                <a href="https://github.com/kevzkip/arduino_LED_Traffic_Lights" target="_blank">Live Demo</a>
-               </div>
-            </div> 
-            <!-- Project cards4 --> 
-            <div class="project-item">
-              <i class="fas fa-network-wired project-icon"></i>
-              <h2>Network Optimization Tool</h2>
-              <p>A tool for analyzing and optimizing network performance using machine learning algorithms.</p>
-              <div class="project-links">
-                <a href="#" target="_blank">View Code</a>
-                <a href="#" target="_blank">Live Demo</a>
-              </div>
-            </div>
-            <!-- Project cards5 -->
-            <div class="project-item">
-              <i class="fas fa-cloud project-icon"></i>
-              <h2>Cloud-Based IoT Dashboard</h2>
-              <p>A web-based dashboard for monitoring and controlling IoT(Internet of Things) devices in real-time.</p>
-              <div class="project-links">
-                <a href="#" target="_blank">View Code</a>
-                <a href="#" target="_blank">Live Demo</a>
-              </div>
-            </div>
-            <!-- Project cards6 -->
-            <div class="project-item">
-              <i class="fas fa-chart-line project-icon"></i>
-              <h2>FinMetrics Smart Finance Tracker</h2>
-              <p>A personal finance tracker with graphs and charts of your spending using machine learning algorithms.</p>
-              <div class="project-links">
-                <a href="https://github.com/kevzkip/FinMetrics" target="_blank">View Code</a>
-                <a href="https://github.com/kevzkip/FinMetrics" target="_blank">Live Demo</a>
-              </div>
-            </div>
-        </div>
-      </section>
-      <!--skills section-->
-      <section id="skills">
-        <div class="content-container">
-            <h1>Technical Skills</h1>
-            <div class="skill-chart">
-                <div class="skill-item">
-                    <h2>Embedded C</h2>
-                    <div class="skill-level" data-width="90%"></div>
-                </div>
-                <div class="skill-item">
-                    <h2>Python</h2>
-                    <div class="skill-level" data-width="85%"></div>
-                </div>
-                <div class="skill-item">
-                    <h2>RTOS</h2>
-                    <div class="skill-level" data-width="80%"></div>
-                </div>
-                <div class="skill-item">
-                    <h2>PCB Design</h2>
-                    <div class="skill-level" data-width="75%"></div>
-                </div>
-                <div class="skill-item">
-                    <h2>IoT Protocols</h2>
-                    <div class="skill-level" data-width="70%"></div>
-                </div>
-                <div class="skill-item">
-                    <h2>ARM Cortex</h2>
-                    <div class="skill-level" data-width="65%"></div>
-                </div>
-                <div class="skill-item">
-                    <h2>Cloud Computing (AWS, Firebase)</h2>
-                    <div class="skill-level" data-width="70%"></div>
-                </div>
-                <div class="skill-item">
-                    <h2>Linux</h2>
-                    <div class="skill-level" data-width="75%"></div>
-                </div>
-                <div class="skill-item">
-                    <h2>Networking (CCNA, TCP/IP)</h2>
-                    <div class="skill-level" data-width="65%"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Gallery section -->
-    <section id="gallery">
-      <div class="content-container">
-        <h1>Work Gallery</h1>
-        <div class="photo-grid">
-          <div class="photo-item">
-            <img src="https://img.freepik.com/free-photo/portrait-engineer-job-site-work-hours_23-2151589648.jpg?t=st=1743775132~exp=1743778732~hmac=cfeecec415fe262358b44eb85d394b86bda83ead751f28220f7dfcd60db264a2&w=1380" alt="Cell Site Survey">
-            <p>Conducting RF site survey in Nairobi</p>
           </div>
-          <div class="photo-item">
-            <img src="https://img.freepik.com/premium-photo/male-hands-connecting-cables-wires-server-room-while-setting-up-network_236854-46809.jpg?ga=GA1.1.219115491.1743774814&semt=ais_hybrid&w=740" alt="Fiber Splicing">
-            <p>Fiber optic splicing workshop</p>
-          </div>
-          <div class="photo-item">
-            <img src="https://img.freepik.com/free-photo/factory-manager-shakes-hands-with-investor-working-expand-production_482257-120488.jpg?ga=GA1.1.219115491.1743774814&semt=ais_hybrid&w=740" alt="Conference">
-            <p>Presenting at AfricaCom 2022</p>
-          </div>
-          <div class="photo-item">
-            <img src="https://img.freepik.com/free-photo/technology-particle-dots-5g-digital-corporate-background_53876-102624.jpg?ga=GA1.1.219115491.1743774814&semt=ais_hybrid&w=740" alt="Network Design">
-            <p>5G network architecture design</p>                     
-          </div>
-          <div class="photo-item">
-            <img src="https://img.freepik.com/free-photo/networked-cityscape-with-connected-icons_9975-22451.jpg?ga=GA1.1.219115491.1743774814&semt=ais_hybrid&w=740" alt="IoT">
-            <p>IoT</p>                     
-          </div>
-          <div class="photo-item">
-            <img src="https://img.freepik.com/free-photo/saas-concept-collage_23-2149399281.jpg?ga=GA1.1.219115491.1743774814&semt=ais_hybrid&w=740" alt="Cloud">
-            <p>Cloud Computing</p>                     
-          </div>
+
         </div>
       </div>
     </section>
 
-    <!-- Contact section using formspree to submit andcollect data input fro, user -->
-    <section id="contact">
-        <div class="content-container">
-          <h1>Get In Touch</h1>
-          <form id="contactForm" action="https://formspree.io/f/xgvanrne" method="POST">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="_replyto" placeholder="Your Email" required>
-            <textarea name="message" placeholder="Your Message" required rows="5"></textarea>
-            <input type="hidden" name="_subject" value="New portfolio message!">
-            <button type="submit">Send Message</button>
+    <!-- PROJECTS -->
+    <section id="projects" class="section projects-section">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-tag">03</span>
+          <h2 class="section-title">Projects</h2>
+        </div>
+
+        <div class="featured-project glass reveal">
+          <div class="featured-badge gold">Featured · Final Year Project</div>
+          <div class="featured-content">
+            <div class="featured-text">
+              <h3 class="featured-title">LoRaWAN Smart Irrigation System</h3>
+              <p class="featured-desc">A two-node LoRa-based smart irrigation system built for remote agricultural environments. Uses ESP32 + SX1278 Ra-01 LoRa modules with DHT11 temperature/humidity sensing and resistive soil moisture sensing. Implements automatic dual-condition irrigation logic, manual override via Blynk IoT, and RSSI/SNR link quality monitoring.</p>
+              <p class="featured-desc">Field tested to <span class="gold">800 m in urban NLOS conditions</span> in Nairobi. Designed with LPWAN principles for low-power, long-range IoT data pipelines.</p>
+              <div class="featured-tags">
+                <span class="tag tag-gold">ESP32</span>
+                <span class="tag tag-gold">LoRa / SX1278</span>
+                <span class="tag tag-gold">Blynk IoT</span>
+                <span class="tag tag-gold">DHT11</span>
+                <span class="tag tag-gold">LPWAN</span>
+                <span class="tag tag-gold">C++</span>
+              </div>
+              <a href="https://github.com/kevzkip" class="btn btn-primary" target="_blank">View on GitHub</a>
+            </div>
+            <div class="featured-visual">
+              <div class="project-diagram">
+                <div class="diagram-node transmitter">
+                  <span class="node-label">TX Node</span>
+                  <span class="node-sub">ESP32 + Ra-01<br>DHT11 + Soil Sensor</span>
+                </div>
+                <div class="diagram-wave">
+                  <div class="wave-line"></div>
+                  <span class="wave-label">433 MHz LoRa<br>≤800 m NLOS</span>
+                </div>
+                <div class="diagram-node receiver">
+                  <span class="node-label">RX Node</span>
+                  <span class="node-sub">ESP32 + Ra-01<br>Relay + Pump</span>
+                </div>
+                <div class="diagram-cloud">
+                  <span class="cloud-label">☁ Blynk IoT</span>
+                  <span class="cloud-sub">Remote Override</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="projects-sub">
+          <h4 class="sub-heading">Hackathon &amp; Competition</h4>
+          <div class="projects-grid">
+            <div class="project-card glass reveal">
+              <div class="project-card-header">
+                <span class="project-icon">🏆</span>
+                <span class="project-year">2022–2025</span>
+              </div>
+              <h4>Huawei ICT Academy Competition</h4>
+              <p>Competed four consecutive years in Huawei's ICT Academy, working on networking, IoT, and AI-driven projects.</p>
+              <div class="project-tags">
+                <span class="tag">Networking</span><span class="tag">IoT</span><span class="tag">AI</span>
+              </div>
+            </div>
+            <div class="project-card glass reveal">
+              <div class="project-card-header">
+                <span class="project-icon">⚡</span>
+                <span class="project-year">2025</span>
+              </div>
+              <h4>Power Learn Project Hackathon</h4>
+              <p>Participated in PLP hackathon focused on software development and cloud-native solutions for African markets.</p>
+              <div class="project-tags">
+                <span class="tag">Cloud</span><span class="tag">Software Dev</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section skills-section">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-tag">04</span>
+          <h2 class="section-title">Skills</h2>
+        </div>
+        <div class="skills-grid">
+
+          <div class="skill-group glass reveal">
+            <div class="skill-group-header">
+              <span class="skill-icon">📡</span>
+              <h4>Network &amp; Telecom</h4>
+            </div>
+            <div class="skill-tags">
+              <span class="tag">NOC/SOC Operations</span>
+              <span class="tag">KPI Monitoring</span>
+              <span class="tag">SmartCare/SEQ</span>
+              <span class="tag">5G Fundamentals</span>
+              <span class="tag">Optical Fiber</span>
+              <span class="tag">SDN/NFV</span>
+              <span class="tag">Network Virtualization</span>
+            </div>
+          </div>
+
+          <div class="skill-group glass reveal">
+            <div class="skill-group-header">
+              <span class="skill-icon">☁️</span>
+              <h4>Cloud &amp; Infrastructure</h4>
+            </div>
+            <div class="skill-tags">
+              <span class="tag">AWS (Certified)</span>
+              <span class="tag">Linux Sysadmin</span>
+              <span class="tag">Shell Scripting</span>
+              <span class="tag">AWS CLI</span>
+              <span class="tag">VPC</span>
+              <span class="tag">Kubernetes (kubectl)</span>
+              <span class="tag">Server Config</span>
+            </div>
+          </div>
+
+          <div class="skill-group glass reveal">
+            <div class="skill-group-header">
+              <span class="skill-icon">📊</span>
+              <h4>Data &amp; Analytics</h4>
+            </div>
+            <div class="skill-tags">
+              <span class="tag">SQL</span>
+              <span class="tag">Dashboard Analysis</span>
+              <span class="tag">KPI Reporting</span>
+              <span class="tag">CEM</span>
+              <span class="tag">Incident Reporting</span>
+              <span class="tag">Jira</span>
+            </div>
+          </div>
+
+          <div class="skill-group glass reveal">
+            <div class="skill-group-header">
+              <span class="skill-icon">💻</span>
+              <h4>Programming</h4>
+            </div>
+            <div class="skill-tags">
+              <span class="tag">Python</span>
+              <span class="tag">C / C++</span>
+              <span class="tag">SQL</span>
+              <span class="tag">Bash</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">Git / GitHub</span>
+              <span class="tag">REST APIs</span>
+            </div>
+          </div>
+
+          <div class="skill-group glass reveal">
+            <div class="skill-group-header">
+              <span class="skill-icon">🔧</span>
+              <h4>Embedded Systems</h4>
+            </div>
+            <div class="skill-tags">
+              <span class="tag">Arduino / ESP32</span>
+              <span class="tag">Raspberry Pi</span>
+              <span class="tag">LoRa / LPWAN</span>
+              <span class="tag">MQTT</span>
+              <span class="tag">NB-IoT</span>
+              <span class="tag">PCB Design</span>
+              <span class="tag">Circuit Simulation</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section id="certifications" class="section certs-section">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-tag">05</span>
+          <h2 class="section-title">Certifications</h2>
+        </div>
+        <div class="certs-grid">
+
+          <div class="cert-card glass reveal">
+            <div class="cert-issuer-badge aws">AWS</div>
+            <div class="cert-info">
+              <h4>Cloud Practitioner</h4>
+              <p>Amazon Web Services</p>
+              <span class="cert-year">2025</span>
+            </div>
+          </div>
+
+          <div class="cert-card glass reveal">
+            <div class="cert-issuer-badge mathworks">MW</div>
+            <div class="cert-info">
+              <h4>Machine Learning</h4>
+              <p>MathWorks</p>
+              <span class="cert-year">2024</span>
+            </div>
+          </div>
+
+          <div class="cert-card glass reveal">
+            <div class="cert-issuer-badge mathworks">MW</div>
+            <div class="cert-info">
+              <h4>MATLAB Fundamentals</h4>
+              <p>MathWorks</p>
+              <span class="cert-year">2024</span>
+            </div>
+          </div>
+
+          <div class="cert-card glass reveal">
+            <div class="cert-issuer-badge ibm">IBM</div>
+            <div class="cert-info">
+              <h4>Cybersecurity Fundamentals</h4>
+              <p>IBM</p>
+              <span class="cert-year">2024</span>
+            </div>
+          </div>
+
+          <div class="cert-card glass reveal">
+            <div class="cert-issuer-badge fcc">fCC</div>
+            <div class="cert-info">
+              <h4>Responsive Web Design</h4>
+              <p>freeCodeCamp</p>
+              <span class="cert-year">2023</span>
+            </div>
+          </div>
+
+          <div class="cert-card glass reveal">
+            <div class="cert-issuer-badge fcc">fCC</div>
+            <div class="cert-info">
+              <h4>JS Algorithms &amp; Data Structures</h4>
+              <p>freeCodeCamp</p>
+              <span class="cert-year">2023</span>
+            </div>
+          </div>
+
+          <div class="cert-card glass reveal">
+            <div class="cert-issuer-badge plp">PLP</div>
+            <div class="cert-info">
+              <h4>Software Development</h4>
+              <p>Power Learn Project</p>
+              <span class="cert-year">2025</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- LEADERSHIP -->
+    <section id="leadership" class="section leadership-section">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-tag">06</span>
+          <h2 class="section-title">Leadership &amp; Volunteering</h2>
+        </div>
+        <div class="leadership-grid">
+
+          <div class="leadership-card glass reveal">
+            <span class="leadership-icon">🌍</span>
+            <h4>Aspire Leaders Program Fellow</h4>
+            <p>Selected as a fellow in the Harvard-affiliated Aspire Leaders Program, a competitive global leadership development initiative.</p>
+            <span class="leadership-year">2024</span>
+          </div>
+
+          <div class="leadership-card glass reveal">
+            <span class="leadership-icon">🎓</span>
+            <h4>Academic Mentor</h4>
+            <p>Peer tutoring and academic mentorship in STEM subjects for fellow students at the University of Nairobi.</p>
+            <span class="leadership-year">Ongoing</span>
+          </div>
+
+          <div class="leadership-card glass reveal">
+            <span class="leadership-icon">🌐</span>
+            <h4>Global Mentorship Participant</h4>
+            <p>Engaged in a structured cross-border mentorship program connecting emerging engineers with industry professionals.</p>
+            <span class="leadership-year">2024–2025</span>
+          </div>
+
+          <div class="leadership-card glass reveal">
+            <span class="leadership-icon">🚀</span>
+            <h4>Ascent Leadership Experience</h4>
+            <p>Selected participant in the Ascent Leadership Experience program for high-potential emerging leaders.</p>
+            <span class="leadership-year">2026</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section contact-section">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-tag">07</span>
+          <h2 class="section-title">Get In Touch</h2>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-info reveal">
+            <p class="contact-intro">I'm currently finishing my final year and open to graduate roles, internships, and interesting conversations in cloud, networking, and telecoms engineering.</p>
+            <div class="contact-links">
+              <a href="mailto:kevinlangat12490@gmail.com" class="contact-link glass">
+                <span class="contact-link-icon">✉</span>
+                <div>
+                  <span class="contact-link-label">Email</span>
+                  <span class="contact-link-value">kevinlangat12490@gmail.com</span>
+                </div>
+              </a>
+              <a href="https://linkedin.com/in/kevinkip" target="_blank" class="contact-link glass">
+                <span class="contact-link-icon">in</span>
+                <div>
+                  <span class="contact-link-label">LinkedIn</span>
+                  <span class="contact-link-value">linkedin.com/in/kevinkip</span>
+                </div>
+              </a>
+              <a href="https://github.com/kevzkip" target="_blank" class="contact-link glass">
+                <span class="contact-link-icon">&lt;/&gt;</span>
+                <div>
+                  <span class="contact-link-label">GitHub</span>
+                  <span class="contact-link-value">github.com/kevzkip</span>
+                </div>
+              </a>
+              <a href="tel:+254714345025" class="contact-link glass">
+                <span class="contact-link-icon">☎</span>
+                <div>
+                  <span class="contact-link-label">Phone</span>
+                  <span class="contact-link-value">+254 714 345 025</span>
+                </div>
+              </a>
+            </div>
+          </div>
+          <form class="contact-form glass reveal" id="contact-form" action="https://formspree.io/f/xgvanrne" method="POST">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Your name" required/>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="your@email.com" required/>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" placeholder="What's on your mind?" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary full-width">Send Message</button>
           </form>
         </div>
-      </section>
+      </div>
+      <footer class="footer">
+        <p>© 2026 Kevin Kipkorir · Built with purpose, not a template.</p>
+      </footer>
+    </section>
+
   </main>
-  <!-- Footer section -->
-  <footer>
-    <div class="footer-content">
-      <div class="footer-about">
-        <h3>Kevin Kipkorir</h3>
-        <p>Electrical & Electronics Engineering student | IoT | Cloud Computing | Embedded Systems</p>
-      </div>
-      <div class="footer-links">
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-      </div>
-      <div class="social-links">
-        <a href="https://discord.com/kevin_kip" target="_blank"><i class="fab fa-discord"></i></a>
-        <a href="https://www.linkedin.com/in/kevinkip" target="_blank"><i class="fab fa-linkedin"></i></a>
-        <a href="https://github.com/kevzkip" target="_blank"><i class="fab fa-github"></i></a>
-        
-      </div>
-      <div>
-        <a href="https://drive.google.com/file/d/1YX58i4suY5KmSMc4OLa7A6s5-v3QZWdK/view?usp=sharing" target="_blank" class="download-btn">
-          <i class="fas fa-download"></i> Download CV
-        </a>
-      
-      </div>
-    
-    </div>
-    <p class="copyright">© 2025 Kevin Kipkorir. All rights reserved.</p>
-  </footer>
-  <!-- JavaScript -->
+
   <script src="script.js"></script>
 </body>
 </html>
