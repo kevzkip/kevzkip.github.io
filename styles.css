@@ -120,7 +120,8 @@ h1,h2,h3,h4 { font-family: 'Syne', sans-serif; font-weight: 700; line-height: 1.
   transition: opacity var(--transition), transform var(--transition);
   pointer-events: none;
 }
-.sidebar:hover .nav-label {
+.sidebar:hover .nav-label,
+.sidebar.open .nav-label {
   opacity: 1;
   transform: translateX(0);
 }
@@ -672,6 +673,31 @@ h1,h2,h3,h4 { font-family: 'Syne', sans-serif; font-weight: 700; line-height: 1.
 }
 .form-group input::placeholder,
 .form-group textarea::placeholder { color: var(--white-30); }
+.form-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 12px;
+  padding: 48px 24px;
+  min-height: 280px;
+}
+.form-success-icon {
+  font-size: 2rem;
+  color: var(--gold);
+  animation: fadeUp 0.5s ease forwards;
+}
+.form-success h4 {
+  font-size: 1.3rem;
+  color: var(--white);
+  animation: fadeUp 0.5s 0.1s ease both;
+}
+.form-success p {
+  font-size: 0.9rem;
+  color: var(--white-60);
+  animation: fadeUp 0.5s 0.2s ease both;
+}
 .footer {
   text-align: center;
   padding: 40px 0 20px;
