@@ -129,15 +129,13 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   form.addEventListener('submit', async e => {
     const btn = form.querySelector('button[type="submit"]');
     const action = form.getAttribute('action');
-    // If Formspree ID not set, just show a placeholder response
-    if (action.includes('xgvanrne')) {
-      e.preventDefault();
-      btn.textContent = 'Set up Formspree to enable this ✓';
-      btn.style.background = '#2a4a2a';
-      btn.style.color = '#6fcf97';
-      return;
-    }
     btn.textContent = 'Sending…';
     btn.disabled = true;
+    // Let Formspree handle the submission natively
+    // Re-enable button after a delay in case of error
+    setTimeout(() => {
+      btn.textContent = 'Send Message';
+      btn.disabled = false;
+    }, 5000);
   });
 })();
