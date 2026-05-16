@@ -126,16 +126,36 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 (function () {
   const form = document.getElementById('contact-form');
   if (!form) return;
+
   form.addEventListener('submit', async e => {
+    e.preventDefault();
     const btn = form.querySelector('button[type="submit"]');
-    const action = form.getAttribute('action');
     btn.textContent = 'Sending…';
     btn.disabled = true;
-    // Let Formspree handle the submission natively
-    // Re-enable button after a delay in case of error
-    setTimeout(() => {
-      btn.textContent = 'Send Message';
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        form.innerHTML = `
+          <div class="form-success">
+            <span class="form-success-icon">✦</span>
+            <h4>Message Sent</h4>
+            <p>Thanks for reaching out — I'll get back to you soon.</p>
+          </div>
+        `;
+      } else {
+        btn.textContent = 'Something went wrong — try again';
+        btn.style.background = '#4a2a2a';
+        btn.disabled = false;
+      }
+    } catch (err) {
+      btn.textContent = 'Network error — try again';
       btn.disabled = false;
-    }, 5000);
+    }
   });
 })();
