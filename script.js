@@ -1,182 +1,143 @@
-document.addEventListener("DOMContentLoaded", () => {
-    //my kevin portfolio js.script
-    // ========== Mobile Navigation ==========
-    const hamburger = document.querySelector(".hamburger");
-    const navLinks = document.querySelector(".nav-links");
-  
-    const toggleMobileMenu = () => {
-      navLinks.classList.toggle("show");
-      hamburger.setAttribute(
-        'aria-expanded', 
-        navLinks.classList.contains("show")
-      );
-    };
-  
-    hamburger.addEventListener("click", toggleMobileMenu);
-  
-    // Close mobile menu when clicking a link
-    document.querySelectorAll(".nav-links a").forEach(link => {
-      link.addEventListener("click", () => {
-        navLinks.classList.remove("show");
-        hamburger.setAttribute('aria-expanded', 'false');
-      });
-    });
-  
-    // ========== Active Section Highlighting ==========
-    const sections = document.querySelectorAll("section");
-    const navItems = document.querySelectorAll("nav ul li a");
-  
-    const highlightActiveSection = () => {
-      let current = "";
-      const scrollPosition = window.scrollY + 200;
-  
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        
-        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-          current = section.getAttribute("id");
-        }
-      });
-  
-      navItems.forEach(item => {
-        item.classList.remove("active");
-        if (item.getAttribute("href") === `#${current}`) {
-          item.classList.add("active");
-        }
-      });
-    };
-  
-    // Debounce scroll event for performance
-    let isScrolling;
-    window.addEventListener("scroll", () => {
-      window.clearTimeout(isScrolling);
-      isScrolling = setTimeout(highlightActiveSection, 100);
-    });
-  
-    // Initialize on load
-    highlightActiveSection();
-  
-    // ========== Skill Bar Animations ==========
-    const skillBars = document.querySelectorAll(".skill-level");
-    const observerOptions = {
-      threshold: 0.5,
-      rootMargin: "0px 0px -50px 0px"
-    };
-  
-    const skillBarObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const width = entry.target.getAttribute("data-width");
-          entry.target.style.setProperty("--width", width);
-          entry.target.classList.add("in-view");
-          skillBarObserver.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-  
-    skillBars.forEach(bar => {
-      skillBarObserver.observe(bar);
-    });
-  
-    // ========== Profile Gallery ==========
-    const profilePics = document.querySelectorAll('.profile-pic');
-    const prevBtn = document.querySelector('.gallery-prev');
-    const nextBtn = document.querySelector('.gallery-next');
-    let currentPic = 0;
-    let galleryInterval;
-  
-    const showPic = (index) => {
-      profilePics.forEach(pic => pic.classList.remove('active'));
-      profilePics[index].classList.add('active');
-    };
-  
-    const nextPic = () => {
-      currentPic = (currentPic + 1) % profilePics.length;
-      showPic(currentPic);
-      resetGalleryInterval();
-    };
-  
-    const prevPic = () => {
-      currentPic = (currentPic - 1 + profilePics.length) % profilePics.length;
-      showPic(currentPic);
-      resetGalleryInterval();
-    };
-  
-    const resetGalleryInterval = () => {
-      clearInterval(galleryInterval);
-      galleryInterval = setInterval(nextPic, 5000);
-    };
-  
-    nextBtn.addEventListener('click', nextPic);
-    prevBtn.addEventListener('click', prevPic);
-  
-    // Initialize gallery with auto-rotation
-    resetGalleryInterval();
-  
-    // ========== Contact Form ==========
-    const contactForm = document.getElementById("contactForm");
-    const showThankYouMessage = () => {
-    const thankYouMessage = document.createElement("div");
-    thankYouMessage.className = "thank-you-message";
-    thankYouMessage.textContent = "Thank you for your message! I'll get back to you soon.";
-    thankYouMessage.setAttribute('role', 'status');
-    thankYouMessage.setAttribute('aria-live', 'polite');
-    document.body.appendChild(thankYouMessage);
+/* ── PARTICLES ── */
+(function () {
+  const canvas = document.getElementById('particles-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  const COUNT = 55;
 
-    setTimeout(() => {
-        thankYouMessage.style.opacity = "1";
-    }, 100);
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
 
-    setTimeout(() => {
-        thankYouMessage.style.opacity = "0";
-        setTimeout(() => {
-        document.body.removeChild(thankYouMessage);
-        }, 300);
-    }, 5000);
-    };
+  function rand(min, max) { return Math.random() * (max - min) + min; }
 
-    const handleFormSubmit = async (e) => {
+  function Particle() {
+    this.reset();
+  }
+  Particle.prototype.reset = function () {
+    this.x  = rand(0, W);
+    this.y  = rand(0, H);
+    this.r  = rand(0.8, 2.2);
+    this.vx = rand(-0.2, 0.2);
+    this.vy = rand(-0.25, -0.05);
+    this.alpha = rand(0.15, 0.55);
+    this.gold  = Math.random() > 0.75;
+  };
+
+  for (let i = 0; i < COUNT; i++) particles.push(new Particle());
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.gold
+        ? `rgba(232,160,32,${p.alpha})`
+        : `rgba(56,189,248,${p.alpha})`;
+      ctx.fill();
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.y < -4 || p.x < -4 || p.x > W + 4) p.reset();
+    });
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+  draw();
+})();
+
+/* ── ACTIVE NAV ON SCROLL ── */
+(function () {
+  const sections  = document.querySelectorAll('section[id]');
+  const navLinks  = document.querySelectorAll('.nav-link');
+
+  function onScroll() {
+    let current = '';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 160) current = sec.id;
+    });
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.dataset.section === current);
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
+/* ── SMOOTH SCROLL FOR NAV LINKS ── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (!target) return;
     e.preventDefault();
-
-    const submitBtn = contactForm.querySelector("button[type='submit']");
-    const originalBtnText = submitBtn.textContent;
-    
-    // Disabling button during submission
-    submitBtn.disabled = true;
-    submitBtn.textContent = "Sending...";
-
-    try {
-        const formData = new FormData(contactForm);
-        
-        // manual fields
-        formData.append('_replyto', contactForm.querySelector('[name="_replyto"]').value);
-        formData.append('name', contactForm.querySelector('[name="name"]').value);
-        
-        const response = await fetch(contactForm.action, {
-        method: 'POST',
-        body: formData,
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
-        });
-
-        if (response.ok) {
-        showThankYouMessage();
-        console.log("Form successfully submitted to Formspree");
-        } else {
-        throw new Error(await response.text());
-        }
-    } catch (error) {
-        console.error("Error:", error);
-        alert("Failed to send message. Please try again later or email me directly.");
-    } finally {
-        contactForm.reset();
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalBtnText;
-    }
-    };
-
-    contactForm.addEventListener("submit", handleFormSubmit);
+    target.scrollIntoView({ behavior: 'smooth' });
+    // close mobile sidebar if open
+    const sidebar  = document.getElementById('sidebar');
+    const overlay  = document.getElementById('sidebar-overlay');
+    if (sidebar)  sidebar.classList.remove('open');
+    if (overlay) overlay.classList.remove('visible');
   });
+});
+
+/* ── REVEAL ON SCROLL ── */
+(function () {
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+})();
+
+/* ── MOBILE HAMBURGER ── */
+(function () {
+  const hamburger = document.getElementById('hamburger');
+  const sidebar   = document.getElementById('sidebar');
+  if (!hamburger || !sidebar) return;
+
+  // create overlay if not present
+  let overlay = document.getElementById('sidebar-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'sidebar-overlay';
+    overlay.className = 'sidebar-overlay';
+    document.body.appendChild(overlay);
+  }
+
+  hamburger.addEventListener('click', () => {
+    const open = sidebar.classList.toggle('open');
+    overlay.classList.toggle('visible', open);
+  });
+  overlay.addEventListener('click', () => {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('visible');
+  });
+})();
+
+/* ── CONTACT FORM ── */
+(function () {
+  const form = document.getElementById('contact-form');
+  if (!form) return;
+  form.addEventListener('submit', async e => {
+    const btn = form.querySelector('button[type="submit"]');
+    const action = form.getAttribute('action');
+    // If Formspree ID not set, just show a placeholder response
+    if (action.includes('xgvanrne')) {
+      e.preventDefault();
+      btn.textContent = 'Set up Formspree to enable this ✓';
+      btn.style.background = '#2a4a2a';
+      btn.style.color = '#6fcf97';
+      return;
+    }
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+  });
+})();
