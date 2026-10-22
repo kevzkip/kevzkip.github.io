@@ -1,161 +1,119 @@
-/* ── PARTICLES ── */
-(function () {
-  const canvas = document.getElementById('particles-canvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let W, H, particles = [];
-  const COUNT = 55;
+// --- THEME TOGGLE LOGIC ---
+const themeToggleBtn = document.getElementById('theme-toggle');
+const mobileThemeToggleBtn = document.getElementById('mobile-theme-toggle');
+const themeIcon = themeToggleBtn.querySelector('i');
+const mobileThemeIcon = mobileThemeToggleBtn.querySelector('i');
+const htmlElement = document.documentElement;
 
-  function resize() {
-    W = canvas.width  = canvas.offsetWidth;
-    H = canvas.height = canvas.offsetHeight;
-  }
+function updateThemeIcons(theme) {
+    if (theme === 'light') {
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+        mobileThemeIcon.classList.replace('fa-moon', 'fa-sun');
+    } else {
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
+        mobileThemeIcon.classList.replace('fa-sun', 'fa-moon');
+    }
+}
 
-  function rand(min, max) { return Math.random() * (max - min) + min; }
+if (htmlElement.getAttribute('data-theme') === 'light') {
+    updateThemeIcons('light');
+}
 
-  function Particle() {
-    this.reset();
-  }
-  Particle.prototype.reset = function () {
-    this.x  = rand(0, W);
-    this.y  = rand(0, H);
-    this.r  = rand(0.8, 2.2);
-    this.vx = rand(-0.2, 0.2);
-    this.vy = rand(-0.25, -0.05);
-    this.alpha = rand(0.15, 0.55);
-    this.gold  = Math.random() > 0.75;
-  };
+function toggleTheme() {
+    const currentTheme = htmlElement.getAttribute('data-theme');
+    if (currentTheme === 'light') {
+        htmlElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'dark');
+        updateThemeIcons('dark');
+    } else {
+        htmlElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+        updateThemeIcons('light');
+    }
+}
 
-  for (let i = 0; i < COUNT; i++) particles.push(new Particle());
+themeToggleBtn.addEventListener('click', toggleTheme);
+mobileThemeToggleBtn.addEventListener('click', toggleTheme);
 
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
-    particles.forEach(p => {
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = p.gold
-        ? `rgba(232,160,32,${p.alpha})`
-        : `rgba(56,189,248,${p.alpha})`;
-      ctx.fill();
-      p.x += p.vx;
-      p.y += p.vy;
-      if (p.y < -4 || p.x < -4 || p.x > W + 4) p.reset();
-    });
-    requestAnimationFrame(draw);
-  }
+// --- MOBILE MENU LOGIC ---
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const mobileNav = document.getElementById('mobile-nav');
+const mobileIcon = mobileMenuBtn.querySelector('i');
 
-  window.addEventListener('resize', resize);
-  resize();
-  draw();
-})();
-
-/* ── ACTIVE NAV ON SCROLL ── */
-(function () {
-  const sections  = document.querySelectorAll('section[id]');
-  const navLinks  = document.querySelectorAll('.nav-link');
-
-  function onScroll() {
-    let current = '';
-    sections.forEach(sec => {
-      if (window.scrollY >= sec.offsetTop - 160) current = sec.id;
-    });
-    navLinks.forEach(link => {
-      link.classList.toggle('active', link.dataset.section === current);
-    });
-  }
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-})();
-
-/* ── SMOOTH SCROLL FOR NAV LINKS ── */
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const target = document.querySelector(a.getAttribute('href'));
-    if (!target) return;
-    e.preventDefault();
-    target.scrollIntoView({ behavior: 'smooth' });
-    // close mobile sidebar if open
-    const sidebar  = document.getElementById('sidebar');
-    const overlay  = document.getElementById('sidebar-overlay');
-    if (sidebar)  sidebar.classList.remove('open');
-    if (overlay) overlay.classList.remove('visible');
-  });
+mobileMenuBtn.addEventListener('click', () => {
+    if (mobileNav.style.display === 'flex') {
+        mobileNav.style.display = 'none';
+        mobileIcon.classList.replace('fa-xmark', 'fa-bars');
+    } else {
+        mobileNav.style.display = 'flex';
+        mobileIcon.classList.replace('fa-bars', 'fa-xmark');
+    }
 });
 
-/* ── REVEAL ON SCROLL ── */
-(function () {
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-        observer.unobserve(entry.target);
-      }
+// Close mobile menu when a link is clicked
+mobileNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+        mobileNav.style.display = 'none';
+        mobileIcon.classList.replace('fa-xmark', 'fa-bars');
     });
-  }, { threshold: 0.1 });
-  reveals.forEach(el => observer.observe(el));
-})();
+});
 
-/* ── MOBILE HAMBURGER ── */
-(function () {
-  const hamburger = document.getElementById('hamburger');
-  const sidebar   = document.getElementById('sidebar');
-  if (!hamburger || !sidebar) return;
+// --- NAVIGATION & SCROLL LOGIC ---
+const sections = document.querySelectorAll('section');
+const navLinks = document.querySelectorAll('.nav-links a');
+const backToTopBtn = document.getElementById('back-to-top');
 
-  // create overlay if not present
-  let overlay = document.getElementById('sidebar-overlay');
-  if (!overlay) {
-    overlay = document.createElement('div');
-    overlay.id = 'sidebar-overlay';
-    overlay.className = 'sidebar-overlay';
-    document.body.appendChild(overlay);
-  }
+window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+            current = section.getAttribute('id');
+        }
+    });
 
-  hamburger.addEventListener('click', () => {
-    const open = sidebar.classList.toggle('open');
-    overlay.classList.toggle('visible', open);
-  });
-  overlay.addEventListener('click', () => {
-    sidebar.classList.remove('open');
-    overlay.classList.remove('visible');
-  });
-})();
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+        }
+    });
 
-/* ── CONTACT FORM ── */
-(function () {
-  const form = document.getElementById('contact-form');
-  if (!form) return;
-
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
-    const btn = form.querySelector('button[type="submit"]');
-    btn.textContent = 'Sending…';
-    btn.disabled = true;
-
-    try {
-      const response = await fetch(form.action, {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
-      });
-
-      if (response.ok) {
-        form.innerHTML = `
-          <div class="form-success">
-            <span class="form-success-icon">✦</span>
-            <h4>Message Sent</h4>
-            <p>Thanks for reaching out — I'll get back to you soon.</p>
-          </div>
-        `;
-      } else {
-        btn.textContent = 'Something went wrong — try again';
-        btn.style.background = '#4a2a2a';
-        btn.disabled = false;
-      }
-    } catch (err) {
-      btn.textContent = 'Network error — try again';
-      btn.disabled = false;
+    if (window.scrollY > 500) {
+        backToTopBtn.classList.add('show');
+    } else {
+        backToTopBtn.classList.remove('show');
     }
-  });
-})();
+});
+
+// --- FORMSPREE AJAX HANDLING ---
+const form = document.getElementById('contact-form');
+const formStatus = document.getElementById('form-status');
+
+if (form) {
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const data = new FormData(form);
+        formStatus.textContent = "Sending...";
+        
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            if (response.ok) {
+                formStatus.textContent = "Message sent successfully!";
+                form.reset();
+            } else {
+                formStatus.textContent = "Oops! There was a problem submitting your form.";
+            }
+        } catch (error) {
+            formStatus.textContent = "Network error. Please try again later.";
+        }
+    });
+}

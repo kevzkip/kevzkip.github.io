@@ -1,524 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Kevin Kipkorir — Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kevin Kipkorir | Network Operations & Cloud Infrastructure</title>
+    <meta name="description" content="Portfolio of Kevin Kipkorir, a recent Electrical & Electronic Engineering graduate specializing in Network Operations and Cloud Infrastructure.">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Theme Check to prevent flash of wrong theme -->
+    <script>
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+    </script>
 </head>
-<body>
+<body id="top">
 
-  <!-- ── SIDEBAR NAV ── -->
-  <nav class="sidebar" id="sidebar">
-    <div class="sidebar-logo">
-      <span class="logo-mark">KK</span>
-    </div>
-    <ul class="nav-links">
-      <li><a href="#hero"          class="nav-link active" data-section="hero">          <span class="nav-icon">⌂</span><span class="nav-label">Home</span></a></li>
-      <li><a href="#about"         class="nav-link"        data-section="about">         <span class="nav-icon">◉</span><span class="nav-label">About</span></a></li>
-      <li><a href="#experience"    class="nav-link"        data-section="experience">    <span class="nav-icon">◈</span><span class="nav-label">Experience</span></a></li>
-      <li><a href="#projects"      class="nav-link"        data-section="projects">      <span class="nav-icon">◧</span><span class="nav-label">Projects</span></a></li>
-      <li><a href="#skills"        class="nav-link"        data-section="skills">        <span class="nav-icon">◈</span><span class="nav-label">Skills</span></a></li>
-      <li><a href="#certifications"class="nav-link"        data-section="certifications"><span class="nav-icon">✦</span><span class="nav-label">Certs</span></a></li>
-      <li><a href="#leadership"    class="nav-link"        data-section="leadership">    <span class="nav-icon">◆</span><span class="nav-label">Leadership</span></a></li>
-      <li><a href="#contact"       class="nav-link"        data-section="contact">       <span class="nav-icon">✉</span><span class="nav-label">Contact</span></a></li>
-    </ul>
-    <div class="sidebar-socials">
-      <a href="https://linkedin.com/in/kevinkip" target="_blank" title="LinkedIn">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-      </a>
-      <a href="https://github.com/kevzkip" target="_blank" title="GitHub">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-      </a>
-    </div>
-  </nav>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-content">
+            <a href="#home" class="logo">
+                <i class="fa-solid fa-terminal"></i> Kevin<span class="logo-lastname"> Kipkorir</span>
+            </a>
+            
+            <!-- Desktop Nav -->
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#blogs">Blogs</a>
+                <a href="https://drive.google.com/file/d/1kOpMxXG0q_DeF6cADoo3HQC8g_mOgfJZ/view?usp=drive_link" target="_blank" class="btn-outline">Resume</a>
+                <a href="#contact" class="btn-outline">Contact</a>
+                <button id="theme-toggle" aria-label="Toggle Dark Mode">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </div>
 
-  <!-- ── HAMBURGER ── -->
-  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-    <span></span><span></span><span></span>
-  </button>
-
-  <!-- ── MAIN CONTENT ── -->
-  <main class="main-content">
-
-    <!-- HERO -->
-    <section id="hero" class="section hero-section">
-      <canvas id="particles-canvas"></canvas>
-      <div class="hero-inner">
-        <p class="hero-eyebrow">EEE Graduate · University of Nairobi</p>
-        <h1 class="hero-name">Kevin <span class="gold">Kipkorir</span></h1>
-        <p class="hero-title">Electrical &amp; Electronics Engineer</p>
-        <p class="hero-sub">Network Operations · Telecoms Infrastructure · Cloud & Emerging Tech</p>
-        <div class="hero-ctas">
-          <a href="https://drive.google.com/file/d/1YX58i4suY5KmSMc4OLa7A6s5-v3QZWdK/view?usp=sharing" target="_blank" class="btn btn-primary">Download CV</a>
-          <a href="#contact" class="btn btn-ghost">Get In Touch</a>
+            <!-- Mobile Hamburger Button -->
+            <button id="mobile-menu-btn" aria-label="Toggle Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
         </div>
-      </div>
-      <div class="scroll-indicator">
-        <span></span>
-      </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div class="mobile-nav" id="mobile-nav">
+            <a href="#about">About</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#blogs">Blogs</a>
+            <a href="https://drive.google.com/file/d/1kOpMxXG0q_DeF6cADoo3HQC8g_mOgfJZ/view?usp=drive_link" target="_blank">Resume</a>
+            <a href="#contact">Contact</a>
+            <button id="mobile-theme-toggle" aria-label="Toggle Dark Mode">
+                <i class="fa-solid fa-moon"></i> Toggle Theme
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="greeting">Hi, I'm</h1>
+            <h1 class="name">Kevin Kipkorir</h1>
+            <h2 class="title">Building and Automating Resilient Infrastructure.</h2>
+            <p class="summary">
+                I am a recent <strong>Electrical & Electronic Engineering graduate</strong> with hands-on experience in Tier-1 Network Operations. I specialize in ensuring high availability in live production environments. As the industry shifts towards Software-Defined Networking (SDN) and Cloud-Native architecture, I am leveraging Linux, Python, and Docker to manage the next generation of scalable systems.
+            </p>
+            <div class="hero-cta">
+                <a href="#projects" class="btn-primary">View My Work</a>
+                <a href="#blogs" class="btn-secondary">Read the Blog</a>
+            </div>
+        </div>
     </section>
 
-    <!-- ABOUT -->
-    <section id="about" class="section about-section">
-      <div class="section-inner">
-        <div class="section-header">
-          <span class="section-tag">01</span>
-          <h2 class="section-title">About</h2>
+    <!-- About Section -->
+    <section id="about" class="section">
+        <h2 class="section-title"><span class="gradient-text">About Me</span></h2>
+        <div class="section-content">
+            <p>
+                I recently graduated with a degree in Electrical & Electronic Engineering and gained direct industry experience monitoring live Tier-1 enterprise infrastructure at Huawei. That experience taught me firsthand how critical network stability, observability, and incident response are. It also showed me that whether you are running a telecom core, a banking database, or a cloud platform, the core requirement is always the same: zero downtime.
+            </p>
+            <p>
+                Currently, I hold an <strong>AWS Certified Cloud Practitioner</strong> certification and am building a strong foundation in Linux systems administration, containerization with Docker, and CI/CD pipelines. My networking foundation includes hands-on exposure to TCP/IP, UDP, DNS, DHCP, VLANs, and routing protocols like BGP and OSPF. My goal is to bridge the gap between legacy telecom infrastructure and modern cloud architectures. I write about this transition in my <a href="#blogs">Blog</a>.
+            </p>
+            <p>Here are a few technologies I've been working with recently:</p>
+            
+            <!-- Boxed Skills Grid -->
+            <div class="skills-grid">
+                <div class="skill-box">
+                    <h4>Core Networking</h4>
+                    <p>TCP/IP, UDP, DNS, DHCP, VLANs, Subnetting</p>
+                </div>
+                <div class="skill-box">
+                    <h4>Routing & Switching</h4>
+                    <p>BGP, OSPF, IS-IS, MPLS (Concepts)</p>
+                </div>
+                <div class="skill-box">
+                    <h4>Network Ops & Tools</h4>
+                    <p>NOC/SOC, SNMP, Wireshark, Ping/Traceroute</p>
+                </div>
+                <div class="skill-box">
+                    <h4>Automation & Cloud</h4>
+                    <p>Linux, Docker, AWS (CCP), Python, CI/CD</p>
+                </div>
+                <div class="skill-box">
+                    <h4>Currently Exploring</h4>
+                    <p>SDN, Kubernetes, Prometheus, Ansible</p>
+                </div>
+            </div>
+            
         </div>
-        <div class="about-grid">
-          <div class="about-text">
-            <p>Electrical &amp; Electronics Engineering graduate from the <span class="gold">University of Nairobi</span>, with hands-on experience in telecom network operations at Huawei Kenya, supporting live Safaricom infrastructure.</p>
-            <p>I'm building toward cloud-native networking and next-generation infrastructure — with particular interest in <span class="gold">5G, Open RAN, SDN/NFV,</span> and network reliability engineering. I'm comfortable across the stack, from embedded systems and RF fundamentals to cloud platforms and operational analytics.</p>
-            <p>I bring both technical depth and the ability to translate complex systems into clear operational insights — developed through NOC work, KPI reporting, and academic research. </p>
-          </div>
-          <div class="about-stats">
-            <div class="stat-card glass">
-              <span class="stat-number gold">1</span>
-              <span class="stat-label">Industry Internship</span>
-              <span class="stat-sub">Huawei Kenya NOC</span>
-            </div>
-            <div class="stat-card glass">
-              <span class="stat-number gold">7+</span>
-              <span class="stat-label">Certifications</span>
-              <span class="stat-sub">AWS, IBM, MathWorks &amp; more</span>
-            </div>
-            <div class="stat-card glass">
-              <span class="stat-number gold">4×</span>
-              <span class="stat-label">Hackathon</span>
-              <span class="stat-sub">Huawei ICT Academy</span>
-            </div>
-            <div class="stat-card glass">
-              <span class="stat-number gold">2026</span>
-              <span class="stat-label">Graduation</span>
-              <span class="stat-sub">BSc EEE · UoN</span>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
 
-    <!-- EXPERIENCE -->
-    <section id="experience" class="section experience-section">
-      <div class="section-inner">
-        <div class="section-header">
-          <span class="section-tag">02</span>
-          <h2 class="section-title">Experience</h2>
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <h2 class="section-title"><span class="gradient-text">Experience</span></h2>
+        <div class="experience-card">
+            <div class="exp-header">
+                <h3>Service Operations Centre (SOC) Intern</h3>
+                <span class="exp-date">Jul 2025 - Oct 2025</span>
+            </div>
+            <h4 class="exp-company">Huawei Kenya (Safaricom Account)</h4>
+            <ul class="exp-details">
+                <li>Delivered L1/L2 technical support for Safaricom's Tier-1 live enterprise infrastructure, ensuring high network availability.</li>
+                <li>Analyzed data from SmartCare/SEQ monitoring platforms to identify service anomalies and generated actionable KPI/CEM reports.</li>
+                <li>Utilized network monitoring tools and protocol analysis (SNMP, TCP/IP) to diagnose connectivity issues and escalate complex routing anomalies to senior engineers.</li>
+                <li>Assisted in physical server installation, configuration, and incident escalation within live data center environments.</li>
+                <li>Utilized SQL to extract network performance data, translating technical findings into clear documentation for management.</li>
+            </ul>
         </div>
-        <div class="timeline">
-
-          <div class="timeline-item reveal">
-            <div class="timeline-marker">
-              <div class="marker-dot"></div>
-              <div class="marker-line"></div>
-            </div>
-            <div class="timeline-card glass">
-              <div class="timeline-header">
-                <div>
-                  <h3 class="job-title">Network Operations Center &amp; Data Analysis Intern</h3>
-                  <p class="job-company"><span class="gold">Huawei Kenya</span> — Supporting Safaricom Live Infrastructure</p>
-                </div>
-                <span class="job-period">Jun 2025 – Nov 2025</span>
-              </div>
-              <ul class="job-bullets">
-                <li>Provided L1/L2 support for Safaricom, ensuring platform stability and 99.9% service availability through rigorous daily health checks of telecom analytics systems.</li>
-                <li>Monitored SmartCare/SEQ platforms and performed service health checks across live telecom environments.</li>
-                <li>Assisted in physical server installation and configuration within production network environments.</li>
-                <li>Utilized SQL and dashboards to generate KPI and CEM performance reports for incident triage and NOC troubleshooting.</li>
-                <li>Gained exposure to cloud-native infrastructure workflows including basic Kubernetes (kubectl) interaction for service inspection and monitoring in production.</li>
-              </ul>
-              <div class="job-tags">
-                <span class="tag">NOC/SOC</span>
-                <span class="tag">SmartCare/SEQ</span>
-                <span class="tag">SQL</span>
-                <span class="tag">KPI Reporting</span>
-                <span class="tag">Linux</span>
-                <span class="tag">Kubernetes</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="timeline-item reveal">
-            <div class="timeline-marker">
-              <div class="marker-dot"></div>
-            </div>
-            <div class="timeline-card glass">
-              <div class="timeline-header">
-                <div>
-                  <h3 class="job-title">BSc Electrical &amp; Electronic Engineering</h3>
-                  <p class="job-company"><span class="gold">University of Nairobi</span></p>
-                </div>
-                <span class="job-period">Sept 2021 – Sept 2026</span>
-              </div>
-              <p class="job-desc">Relevant coursework: Optical Communication Systems, Digital Communication Systems, Computer Communication Networks, Signal Theory &amp; Modulation, Microprocessors, Embedded Controllers, 5G Systems, Power Systems.</p>
-              <div class="job-tags">
-                <span class="tag">UON Coding Club</span>
-                <span class="tag">IEEE</span>
-                <span class="tag">ESA</span>
-                <span class="tag">Robotics &amp; Automation Society</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
     </section>
 
-    <!-- PROJECTS -->
-    <section id="projects" class="section projects-section">
-      <div class="section-inner">
-        <div class="section-header">
-          <span class="section-tag">03</span>
-          <h2 class="section-title">Projects</h2>
-        </div>
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <h2 class="section-title"><span class="gradient-text">Projects</span></h2>
+        <div class="project-grid">
+            
+            <div class="project-card">
+                <div class="project-header">
+                    <h3><i class="fa-solid fa-server project-icon"></i> Infrastructure Lab</h3>
+                    <a href="https://github.com/kevzkip/infra-lab" target="_blank" class="icon-link" aria-label="GitHub Repo"><i class="fa-brands fa-github"></i></a>
+                </div>
+                <p class="project-desc">
+                    An engineering log and documentation platform built to practice modern CI/CD and containerization. I use this lab to apply DevOps concepts (Docker, GitHub Actions, Linux) to real-world scenarios, ensuring infrastructure is deployed consistently and reliably.
+                </p>
+                <div class="project-tech">
+                    <span>Docker</span>
+                    <span>GitHub Actions</span>
+                    <span>MkDocs</span>
+                    <span>Linux</span>
+                </div>
+            </div>
 
-        <div class="featured-project glass reveal">
-          <div class="featured-badge gold">Featured · Final Year Project</div>
-          <div class="featured-content">
-            <div class="featured-text">
-              <h3 class="featured-title">LoRaWAN Smart Irrigation System</h3>
-              <p class="featured-desc">A two-node LoRa-based smart irrigation system built for remote agricultural environments. Uses ESP32 + SX1278 Ra-01 LoRa modules with DHT11 temperature/humidity sensing and resistive soil moisture sensing. Implements automatic dual-condition irrigation logic, manual override via Blynk IoT, and RSSI/SNR link quality monitoring.</p>
-              <p class="featured-desc">Field tested to <span class="gold">800 m in urban NLOS conditions</span> in Nairobi. Designed with LPWAN principles for low-power, long-range IoT data pipelines.</p>
-              <div class="featured-tags">
-                <span class="tag tag-gold">ESP32</span>
-                <span class="tag tag-gold">LoRa / SX1278</span>
-                <span class="tag tag-gold">Blynk IoT</span>
-                <span class="tag tag-gold">DHT11</span>
-                <span class="tag tag-gold">LPWAN</span>
-                <span class="tag tag-gold">C++</span>
-              </div>
-              <a href="https://github.com/kevzkip" class="btn btn-primary" target="_blank">View on GitHub</a>
+            <div class="project-card">
+                <div class="project-header">
+                    <h3><i class="fa-solid fa-microchip project-icon"></i> LoRa Smart Irrigation</h3>
+                </div>
+                <p class="project-desc">
+                    Engineered a remote sensor data transmission system using ESP32 and SX1278 LoRa modules. Achieved reliable communication up to 800m urban NLOS range for IoT-based monitoring.
+                </p>
+                <div class="project-tech">
+                    <span>ESP32</span>
+                    <span>C++</span>
+                    <span>LoRa</span>
+                    <span>IoT</span>
+                </div>
             </div>
-            <div class="featured-visual">
-              <div class="project-diagram">
-                <div class="diagram-node transmitter">
-                  <span class="node-label">TX Node</span>
-                  <span class="node-sub">ESP32 + Ra-01<br>DHT11 + Soil Sensor</span>
-                </div>
-                <div class="diagram-wave">
-                  <div class="wave-line"></div>
-                  <span class="wave-label">433 MHz LoRa<br>≤800 m NLOS</span>
-                </div>
-                <div class="diagram-node receiver">
-                  <span class="node-label">RX Node</span>
-                  <span class="node-sub">ESP32 + Ra-01<br>Relay + Pump</span>
-                </div>
-                <div class="diagram-cloud">
-                  <span class="cloud-label">☁ Blynk IoT</span>
-                  <span class="cloud-sub">Remote Override</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <div class="projects-sub">
-          <h4 class="sub-heading">Hackathon &amp; Competition</h4>
-          <div class="projects-grid">
-            <div class="project-card glass reveal">
-              <div class="project-card-header">
-                <span class="project-icon">🏆</span>
-                <span class="project-year">2022–2025</span>
-              </div>
-              <h4>Huawei ICT Academy Competition</h4>
-              <p>Competed four consecutive years in Huawei's ICT Academy, working on networking, IoT, and AI-driven projects.</p>
-              <div class="project-tags">
-                <span class="tag">Networking</span><span class="tag">IoT</span><span class="tag">AI</span>
-              </div>
-            </div>
-            <div class="project-card glass reveal">
-              <div class="project-card-header">
-                <span class="project-icon">⚡</span>
-                <span class="project-year">2025</span>
-              </div>
-              <h4>Power Learn Project Hackathon</h4>
-              <p>Participated in PLP hackathon focused on software development and cloud-native solutions for African markets.</p>
-              <div class="project-tags">
-                <span class="tag">Cloud</span><span class="tag">Software Dev</span>
-              </div>
-            </div>
-          </div>
         </div>
-
-      </div>
     </section>
 
-    <!-- SKILLS -->
-    <section id="skills" class="section skills-section">
-      <div class="section-inner">
-        <div class="section-header">
-          <span class="section-tag">04</span>
-          <h2 class="section-title">Skills</h2>
+    <!-- Blogs Section -->
+    <section id="blogs" class="section">
+        <h2 class="section-title"><span class="gradient-text">Engineering Blog</span></h2>
+        <p class="section-subtitle">I write about infrastructure, debugging, and systems engineering. Here are my latest posts.</p>
+        
+        <div class="blog-list">
+            <a href="https://kevzkip.github.io/infra-lab/blog/2026/10/16/strict-builds/" class="blog-item">
+                <div class="blog-meta">
+                    <span class="blog-date">Oct 16, 2026</span>
+                    <span class="blog-read-time"><i class="fa-regular fa-clock"></i> 5 min read</span>
+                </div>
+                <h3 class="blog-title">Containerizing MkDocs & Strict CI/CD</h3>
+                <p class="blog-excerpt">
+                    How I migrated a basic static site to a Dockerized environment with strict GitHub Actions pipelines, and the lessons learned about WSL filesystem bottlenecks.
+                </p>
+                <div class="project-tech">
+                    <span>Docker</span>
+                    <span>CI/CD</span>
+                </div>
+            </a>
+            
+            <a href="https://kevzkip.github.io/infra-lab/blog/" class="blog-item">
+                <div class="blog-meta">
+                    <span class="blog-date">View All</span>
+                </div>
+                <h3 class="blog-title">Visit the Infra Lab Blog</h3>
+                <p class="blog-excerpt">
+                    Read all my deep dives, post-mortems, and notes on Linux, containerization, and cloud infrastructure.
+                </p>
+                <div class="project-tech">
+                    <span>Systems</span>
+                    <span>Linux</span>
+                </div>
+            </a>
         </div>
-        <div class="skills-grid">
-
-          <div class="skill-group glass reveal">
-            <div class="skill-group-header">
-              <span class="skill-icon">📡</span>
-              <h4>Network &amp; Telecom</h4>
-            </div>
-            <div class="skill-tags">
-              <span class="tag">NOC/SOC Operations</span>
-              <span class="tag">KPI Monitoring</span>
-              <span class="tag">SmartCare/SEQ</span>
-              <span class="tag">5G Fundamentals</span>
-              <span class="tag">Optical Fiber</span>
-              <span class="tag">SDN/NFV</span>
-              <span class="tag">Network Virtualization</span>
-            </div>
-          </div>
-
-          <div class="skill-group glass reveal">
-            <div class="skill-group-header">
-              <span class="skill-icon">☁️</span>
-              <h4>Cloud &amp; Infrastructure</h4>
-            </div>
-            <div class="skill-tags">
-              <span class="tag">AWS (Certified)</span>
-              <span class="tag">Linux Sysadmin</span>
-              <span class="tag">Shell Scripting</span>
-              <span class="tag">AWS CLI</span>
-              <span class="tag">VPC</span>
-              <span class="tag">Kubernetes (kubectl)</span>
-              <span class="tag">Server Config</span>
-            </div>
-          </div>
-
-          <div class="skill-group glass reveal">
-            <div class="skill-group-header">
-              <span class="skill-icon">📊</span>
-              <h4>Data &amp; Analytics</h4>
-            </div>
-            <div class="skill-tags">
-              <span class="tag">SQL</span>
-              <span class="tag">Dashboard Analysis</span>
-              <span class="tag">KPI Reporting</span>
-              <span class="tag">CEM</span>
-              <span class="tag">Incident Reporting</span>
-              <span class="tag">Jira</span>
-            </div>
-          </div>
-
-          <div class="skill-group glass reveal">
-            <div class="skill-group-header">
-              <span class="skill-icon">💻</span>
-              <h4>Programming</h4>
-            </div>
-            <div class="skill-tags">
-              <span class="tag">Python</span>
-              <span class="tag">C / C++</span>
-              <span class="tag">SQL</span>
-              <span class="tag">Bash</span>
-              <span class="tag">JavaScript</span>
-              <span class="tag">Git / GitHub</span>
-              <span class="tag">REST APIs</span>
-            </div>
-          </div>
-
-          <div class="skill-group glass reveal">
-            <div class="skill-group-header">
-              <span class="skill-icon">🔧</span>
-              <h4>Embedded Systems</h4>
-            </div>
-            <div class="skill-tags">
-              <span class="tag">Arduino / ESP32</span>
-              <span class="tag">Raspberry Pi</span>
-              <span class="tag">LoRa / LPWAN</span>
-              <span class="tag">MQTT</span>
-              <span class="tag">NB-IoT</span>
-              <span class="tag">PCB Design</span>
-              <span class="tag">Circuit Simulation</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
     </section>
 
-    <!-- CERTIFICATIONS -->
-    <section id="certifications" class="section certs-section">
-      <div class="section-inner">
-        <div class="section-header">
-          <span class="section-tag">05</span>
-          <h2 class="section-title">Certifications</h2>
-        </div>
-        <div class="certs-grid">
-
-          <div class="cert-card glass reveal">
-            <div class="cert-issuer-badge aws">AWS</div>
-            <div class="cert-info">
-              <h4>Cloud Practitioner</h4>
-              <p>Amazon Web Services</p>
-              <span class="cert-year">2025</span>
-            </div>
-          </div>
-
-          <div class="cert-card glass reveal">
-            <div class="cert-issuer-badge mathworks">MW</div>
-            <div class="cert-info">
-              <h4>Machine Learning</h4>
-              <p>MathWorks</p>
-              <span class="cert-year">2024</span>
-            </div>
-          </div>
-
-          <div class="cert-card glass reveal">
-            <div class="cert-issuer-badge mathworks">MW</div>
-            <div class="cert-info">
-              <h4>MATLAB Fundamentals</h4>
-              <p>MathWorks</p>
-              <span class="cert-year">2024</span>
-            </div>
-          </div>
-
-          <div class="cert-card glass reveal">
-            <div class="cert-issuer-badge ibm">IBM</div>
-            <div class="cert-info">
-              <h4>Cybersecurity Fundamentals</h4>
-              <p>IBM</p>
-              <span class="cert-year">2024</span>
-            </div>
-          </div>
-
-          <div class="cert-card glass reveal">
-            <div class="cert-issuer-badge fcc">fCC</div>
-            <div class="cert-info">
-              <h4>Responsive Web Design</h4>
-              <p>freeCodeCamp</p>
-              <span class="cert-year">2023</span>
-            </div>
-          </div>
-
-          <div class="cert-card glass reveal">
-            <div class="cert-issuer-badge fcc">fCC</div>
-            <div class="cert-info">
-              <h4>JS Algorithms &amp; Data Structures</h4>
-              <p>freeCodeCamp</p>
-              <span class="cert-year">2023</span>
-            </div>
-          </div>
-
-          <div class="cert-card glass reveal">
-            <div class="cert-issuer-badge plp">PLP</div>
-            <div class="cert-info">
-              <h4>Software Development</h4>
-              <p>Power Learn Project</p>
-              <span class="cert-year">2025</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- LEADERSHIP -->
-    <section id="leadership" class="section leadership-section">
-      <div class="section-inner">
-        <div class="section-header">
-          <span class="section-tag">06</span>
-          <h2 class="section-title">Leadership &amp; Volunteering</h2>
-        </div>
-        <div class="leadership-grid">
-
-          <div class="leadership-card glass reveal">
-            <span class="leadership-icon">🌍</span>
-            <h4>Aspire Leaders Program Fellow</h4>
-            <p>Selected as a fellow in the Harvard-affiliated Aspire Leaders Program, a competitive global leadership development initiative.</p>
-            <span class="leadership-year">2024</span>
-          </div>
-
-          <div class="leadership-card glass reveal">
-            <span class="leadership-icon">🎓</span>
-            <h4>Academic Mentor</h4>
-            <p>Peer tutoring and academic mentorship in STEM subjects for fellow students at the University of Nairobi.</p>
-            <span class="leadership-year">Ongoing</span>
-          </div>
-
-          <div class="leadership-card glass reveal">
-            <span class="leadership-icon">🌐</span>
-            <h4>Global Mentorship Participant</h4>
-            <p>Engaged in a structured cross-border mentorship program connecting emerging engineers with industry professionals.</p>
-            <span class="leadership-year">2024–2025</span>
-          </div>
-
-          <div class="leadership-card glass reveal">
-            <span class="leadership-icon">🚀</span>
-            <h4>IEEE Robotics &amp; Automation Society</h4>
-            <p>Active member of the UoN chapter — contributed to robotics and embedded systems projects, occasionally leading showcases and collaborating with peers on IoT and automation builds.</p>
-            <span class="leadership-year">2021 – Present</span>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="section contact-section">
-      <div class="section-inner">
-        <div class="section-header">
-          <span class="section-tag">07</span>
-          <h2 class="section-title">Get In Touch</h2>
-        </div>
-        <div class="contact-grid">
-          <div class="contact-info reveal">
-            <p class="contact-intro">I'm a recent EEE graduate open to graduate and junior roles in cloud,networking, and telecoms engineering. Always open to interesting conversations. Feel free to reach out.</p>
-            <div class="contact-links">
-              <a href="mailto:kevinlangat12490@gmail.com" class="contact-link glass">
-                <span class="contact-link-icon">✉</span>
-                <div>
-                  <span class="contact-link-label">Email</span>
-                  <span class="contact-link-value">kevinlangat12490@gmail.com</span>
-                </div>
-              </a>
-              <a href="https://linkedin.com/in/kevinkip" target="_blank" class="contact-link glass">
-                <span class="contact-link-icon">in</span>
-                <div>
-                  <span class="contact-link-label">LinkedIn</span>
-                  <span class="contact-link-value">linkedin.com/in/kevinkip</span>
-                </div>
-              </a>
-              <a href="https://github.com/kevzkip" target="_blank" class="contact-link glass">
-                <span class="contact-link-icon">&lt;/&gt;</span>
-                <div>
-                  <span class="contact-link-label">GitHub</span>
-                  <span class="contact-link-value">github.com/kevzkip</span>
-                </div>
-              </a>
-              <a href="tel:+254734584119" class="contact-link glass">
-                <span class="contact-link-icon">☎</span>
-                <div>
-                  <span class="contact-link-label">Phone</span>
-                  <span class="contact-link-value">+254 734 584 119</span>
-                </div>
-              </a>
-            </div>
-          </div>
-          <form class="contact-form glass reveal" id="contact-form" action="https://formspree.io/f/xgvanrne" method="POST">
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <h2 class="section-title"><span class="gradient-text">Get In Touch</span></h2>
+        <p class="section-subtitle">I'm currently seeking internship or entry-level opportunities in Network Operations (NOC), Telecommunications, Cloud Infrastructure Support, or Systems Administration. Whether you have a question or just want to say hi, my inbox is always open.</p>
+        
+        <form id="contact-form" action="https://formspree.io/f/xgvanrne" method="POST" class="contact-form">
             <div class="form-group">
-              <label for="name">Name</label>
-              <input type="text" id="name" name="name" placeholder="Your name" required/>
+                <input type="text" name="name" placeholder="Your Name" required>
             </div>
             <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" placeholder="your@email.com" required/>
+                <input type="email" name="email" placeholder="Your Email" required>
             </div>
             <div class="form-group">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" rows="5" placeholder="What's on your mind?" required></textarea>
+                <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary full-width">Send Message</button>
-          </form>
-        </div>
-      </div>
-      <footer class="footer">
-        <p>© 2026 Kevin Kipkorir</p>
-      </footer>
+            <button type="submit" class="btn-primary">Send Message</button>
+            <p id="form-status"></p>
+        </form>
     </section>
 
-  </main>
+    <!-- Footer & Socials -->
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/kevzkip" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/kevinkip" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="mailto:kevinlangat12490@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+        <p class="copyright">&copy; 2026 Kevin Kipkorir. All rights reserved.</p>
+    </footer>
 
-  <script src="script.js"></script>
+    <!-- Back to Top Arrow -->
+    <a href="#top" class="back-to-top" id="back-to-top" aria-label="Back to Top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </a>
+
+    <script src="script.js"></script>
 </body>
 </html>
