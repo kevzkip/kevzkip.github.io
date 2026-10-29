@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Containerizing my dev environment in infra-lab | Kevin Kipkorir</title>
+    <meta name="description" content="From docker build and docker run to a reproducible compose workflow." />
+    <link rel="canonical" href="https://kevzkip.github.io/blog/containerizing-dev-environment/" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+
+    <script>
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme)
+        document.documentElement.setAttribute("data-theme", savedTheme);
+    </script>
+  </head>
+  <body id="top">
+    <nav id="navbar">
+      <div class="nav-content">
+        <a href="/" class="logo"
+          ><i class="fa-solid fa-terminal"></i> Kevin<span
+            class="logo-lastname"
+          >
+            Kipkorir</span
+          ></a
+        >
+        <div class="nav-links">
+          <a href="/about/">About</a>
+          <a href="/blog/">Blog</a>
+          <a href="/projects">Projects</a>
+          <a href="/#contact" class="btn-outline">Contact</a>
+          <a href="/resume/" class="btn-outline">Resume</a>
+          <button id="theme-toggle" aria-label="Toggle Dark Mode">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+        </div>
+        <button id="mobile-menu-btn" aria-label="Toggle Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+      <div class="mobile-nav" id="mobile-nav">
+        <a href="/about/">About</a>
+        <a href="/blog/">Blog</a>
+        <a href="/projects">Projects</a>
+        <a href="/#contact">Contact</a>
+        <a href="/resume/">Resume</a>
+        <button id="mobile-theme-toggle" aria-label="Toggle Dark Mode">
+          <i class="fa-solid fa-moon"></i> Toggle Theme
+        </button>
+      </div>
+    </nav>
+
+    <!-- Progress Bar at the very top of the page -->
+    <div id="reading-progress"></div>
+
+    <main class="post-page">
+      <div class="post-layout">
+        <!-- Main Article -->
+        <article class="post-content">
+          <header class="post-header">
+            <div class="post-meta"><span class="blog-date">Oct 18, 2026</span></div>
+            <div class="project-meta">
+         <span class="project-badge">Project log</span>
+         <span class="project-name">infra-lab</span>
+       </div>
+            <h1>Containerizing my dev environment in infra-lab</h1>
+            <p class="post-description">From docker build and docker run to a reproducible compose workflow.</p>
+          </header>
+          <div class="post-body"><p>The first version of my <code>infra-lab</code> had zero containerization. I installed dependencies directly on the host, ran the dev server by hand, and then spent twenty minutes every time I switched machines trying to figure out why the build was failing.</p>
+<p>It was the classic &quot;works on my machine&quot; problem, just applied to my own personal projects.</p>
+<h2>The &quot;works on my machine&quot; problem</h2>
+<p>Before Docker, my setup was fragile. I had Python and Node installed globally. If I wanted to test a new version of a package, I risked breaking the host environment. If I accidentally upgraded a system library, my dev server might stop booting entirely.</p>
+<p>I realized I wasn&#39;t just building a project; I was maintaining a brittle operating system environment just to run the project. That was the moment I decided to containerize the development environment.</p>
+<h2>The first attempt: raw Docker</h2>
+<p>I started simple. I wrote a basic <code>Dockerfile</code> that pulled a base image, copied over the requirements, and ran the install command. </p>
+<p>To actually test it, I used the two commands every Docker tutorial starts with:</p>
+<pre><code class="language-bash">docker build -t infra-lab .
+docker run -p 8000:8000 infra-lab
+</code></pre>
+<p>Two commands, one image, and suddenly the environment was reproducible. It didn&#39;t matter what was installed on my host machine; the container had exactly what it needed to run. That alone was a massive improvement.</p>
+<h3>The friction with <code>docker run</code></h3>
+<p>But <code>docker run</code> works for a quick check, not a daily workflow. </p>
+<p>Every time I wanted to restart the server, I had to type out the full <code>docker run</code> command with all the port mappings. If I wanted to add an environment variable, the command got longer. If I wanted to mount a local volume so I could edit files without rebuilding the image, the command became a mess of flags.</p>
+<h2>Leveling up with Docker Compose</h2>
+<p>I quickly realized I needed a declarative way to manage the container lifecycle. Enter Docker Compose. I created a <code>compose.yaml</code> file:</p>
+<pre><code class="language-yaml">services:
+  site:
+    build: .
+    ports:
+      - &quot;8000:8000&quot;
+    volumes:
+      - .:/app
+</code></pre>
+<p>This changed everything. I replaced the raw commands with <code>docker compose up</code> and <code>docker compose down</code>. </p>
+<p>Because of the volume mount (<code>.:/app</code>), the container now re-reads my local files without needing a rebuild. Editing files feels exactly like running a dev server locally, but it&#39;s isolated inside the container. </p>
+<h2>What I&#39;d do differently next time</h2>
+<p>Looking back at the commit history, the migration from raw Docker to Compose was fast, but the initial setup could have been smoother.</p>
+<ul>
+<li><strong>Start with Compose:</strong> Don&#39;t bother with raw <code>docker run</code> unless you&#39;re just testing a base image. The migration from one to the other is mechanical, but you save a week of typing out flags.</li>
+<li><strong>Keep the <code>Dockerfile</code> minimal:</strong> Every extra layer you add is a future cache invalidation. If a single line of code changes and it forces a full package re-install, your build times will suffer.</li>
+<li><strong>Don&#39;t containerize the CI step:</strong> My GitHub Actions runner already has Node and Python pre-installed. Adding a Docker build to the CI pipeline just to run tests actually slowed things down.</li>
+</ul>
+<p>Containerizing the dev environment was the first step in making <code>infra-lab</code> actually feel like an engineering project rather than just a folder of scripts.</p>
+</div>
+          <footer class="post-footer">
+            <div class="project-tech"><span>docker</span><span>ci-cd</span><span>linux</span></div>
+            <a href="/blog/" class="btn-secondary"
+              ><i class="fa-solid fa-arrow-left"></i> All posts</a
+            >
+          </footer>
+        </article>
+
+        <!-- Sticky Sidebar (On this page) -->
+        <aside class="post-sidebar">
+          <nav class="toc-container">
+            <h4 class="toc-title">On this page</h4>
+            <ul id="toc-list">
+              <!-- JavaScript will inject the list of headings here -->
+            </ul>
+          </nav>
+        </aside>
+      </div>
+    </main>
+
+    <footer>
+      <div class="social-links">
+        <a href="https://github.com/kevzkip" target="_blank" aria-label="GitHub"
+          ><i class="fa-brands fa-github"></i
+        ></a>
+        <a
+          href="https://www.linkedin.com/in/kevinkip"
+          target="_blank"
+          aria-label="LinkedIn"
+          ><i class="fa-brands fa-linkedin"></i
+        ></a>
+        <a href="mailto:kevinlangat12490@gmail.com" aria-label="Email"
+          ><i class="fa-solid fa-envelope"></i
+        ></a>
+      </div>
+      <p class="copyright">&copy; 2026 Kevin Kipkorir. All rights reserved.</p>
+    </footer>
+
+    <a href="#top" class="back-to-top" id="back-to-top" aria-label="Back to Top"
+      ><i class="fa-solid fa-arrow-up"></i
+    ></a>
+    <script src="/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kevin Kipkorir | Network Operations & Cloud Infrastructure</title>
+    <meta name="description" content="Portfolio of Kevin Kipkorir, a recent Electrical & Electronic Engineering graduate specializing in Network Operations and Cloud Infrastructure.">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+    <script>
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+</head>
+<body id="top">
+
+    <nav id="navbar">
+        <div class="nav-content">
+            <a href="/" class="logo"><i class="fa-solid fa-terminal"></i> Kevin<span class="logo-lastname"> Kipkorir</span></a>
+            <div class="nav-links">
+                <a href="/about/">About</a>
+                <a href="/blog/">Blog</a>
+                <a href="/projects">Projects</a>
+                <a href="/#contact" class="btn-outline">Contact</a>
+                <a href="/resume/" class="btn-outline">Resume</a>
+                <button id="theme-toggle" aria-label="Toggle Dark Mode"><i class="fa-solid fa-moon"></i></button>
+            </div>
+            <button id="mobile-menu-btn" aria-label="Toggle Menu"><i class="fa-solid fa-bars"></i></button>
+        </div>
+        <div class="mobile-nav" id="mobile-nav">
+            <a href="/about/">About</a>
+            <a href="/blog/">Blog</a>
+            <a href="/projects">Projects</a>
+            <a href="/#contact">Contact</a>
+            <a href="/resume/">Resume</a>
+            <button id="mobile-theme-toggle" aria-label="Toggle Dark Mode"><i class="fa-solid fa-moon"></i> Toggle Theme</button>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="greeting">Hi, I'm</h1>
+            <h1 class="name">Kevin Kipkorir</h1>
+            <h2 class="title">Network Operations & Infrastructure.</h2>
+            <p class="summary">
+                I am a recent <strong>Electrical & Electronic Engineering graduate</strong> with hands-on experience in Tier-1 Network Operations. I am working towards ensuring high availability in live production environments. As the industry shifts towards Software-Defined Networking (SDN) and Cloud-Native architecture, I am leveraging Linux, Python, and Containerization tools to manage the next generation of scalable systems.
+            </p>
+            <div class="hero-cta">
+                <a href="/projects" class="btn-primary">View My Work</a>
+                <a href="/blog/" class="btn-secondary">Read the Blog</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="featured" class="section">
+        <h2 class="section-title"><span class="gradient-text">Featured Writing</span></h2>
+        <p class="section-subtitle">Selected Notes on infrastructure, debugging, and systems engineering.</p>
+        <div class="blog-list">
+            <!-- FEATURED:START -->
+<a href="/blog/containerizing-dev-environment/" class="blog-item" data-type="project" data-project="infra-lab">
+      <div class="blog-meta">
+        <span class="post-badge badge-project">Project · infra-lab</span>
+        <span class="blog-date">Oct 18, 2026</span>
+      </div>
+      <h3 class="blog-title">Containerizing my dev environment in infra-lab</h3>
+      <p class="blog-excerpt">From docker build and docker run to a reproducible compose workflow.</p>
+      <div class="project-tech"><span>docker</span><span>ci-cd</span><span>linux</span></div>
+    </a>
+<a href="/blog/why-i-dropped-mkdocs/" class="blog-item" data-type="Notes">
+      <div class="blog-meta">
+        <span class="post-badge badge-Notes">Notes</span>
+        <span class="blog-date">Oct 16, 2026</span>
+      </div>
+      <h3 class="blog-title">Why I dropped MkDocs for raw Markdown</h3>
+      <p class="blog-excerpt">Simpler builds, no config, and a clearer separation between content and tooling.</p>
+      <div class="project-tech"><span>tooling</span><span>markdown</span><span>ci-cd</span></div>
+    </a>
+    <!-- FEATURED:END -->
+        </div>
+        <div style="margin-top: 30px;">
+            <a href="/blog/" class="btn-secondary">Read all posts <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <h2 class="section-title"><span class="gradient-text">Projects</span></h2>
+        <div class="project-grid">
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3><i class="fa-solid fa-server project-icon"></i> Infrastructure Lab</h3>
+                    <a href="https://github.com/kevzkip/infra-lab" target="_blank" class="icon-link" aria-label="GitHub Repo"><i class="fa-brands fa-github"></i></a>
+                </div>
+                <p class="project-desc">
+                    An engineering log and documentation platform built to practice modern CI/CD and containerization. I use this lab to apply DevOps concepts (Docker, GitHub Actions, Linux) to real-world scenarios, ensuring infrastructure is deployed consistently and reliably.
+                </p>
+                <div class="project-tech">
+                    <span>Docker</span>
+                    <span>GitHub Actions</span>
+                    <span>Linux</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/kevzkip/infra-lab" target="_blank">View repo <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="/blog/?project=infra-lab">Read the write-ups <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3><i class="fa-solid fa-microchip project-icon"></i> LoRa Smart Irrigation</h3>
+                </div>
+                <p class="project-desc">
+                    Engineered a remote sensor data transmission system using ESP32 and SX1278 LoRa modules. Achieved reliable communication up to 800m urban NLOS range for IoT-based monitoring.
+                </p>
+                <div class="project-tech">
+                    <span>ESP32</span>
+                    <span>C++</span>
+                    <span>LoRa</span>
+                    <span>IoT</span>
+                </div>
+                <div class="project-links">
+                    <a href="/blog/?project=lora-irrigation">Read the write-ups <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+        </div>
+        <div style="margin-top: 40px;">
+            <a href="/projects/" class="btn-secondary">View all projects <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <h2 class="section-title"><span class="gradient-text">Get In Touch</span></h2>
+        <p class="section-subtitle">I'm currently seeking internship or entry-level opportunities in Network Operations (NOC), Telecommunications, Cloud Infrastructure Support, or Systems Administration. Send a message, my inbox is always open.</p>
+
+        <form id="contact-form" action="https://formspree.io/f/xgvanrne" method="POST" class="contact-form">
+            <div class="form-group"><input type="text" name="name" placeholder="Your Name" required></div>
+            <div class="form-group"><input type="email" name="email" placeholder="Your Email" required></div>
+            <div class="form-group"><textarea name="message" placeholder="Your Message" rows="5" required></textarea></div>
+            <button type="submit" class="btn-primary">Send Message</button>
+            <p id="form-status"></p>
+        </form>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/kevzkip" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/kevinkip" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="mailto:kevinlangat12490@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+        <p class="copyright">&copy; 2026 Kevin Kipkorir. All rights reserved.</p>
+    </footer>
+
+    <a href="#top" class="back-to-top" id="back-to-top" aria-label="Back to Top"><i class="fa-solid fa-arrow-up"></i></a>
+    <script src="script.js"></script>
+</body>
+</html>

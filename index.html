@@ -5,66 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kevin Kipkorir | Network Operations & Cloud Infrastructure</title>
     <meta name="description" content="Portfolio of Kevin Kipkorir, a recent Electrical & Electronic Engineering graduate specializing in Network Operations and Cloud Infrastructure.">
-    
-    <!-- Font Awesome for Icons -->
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    
-    <!-- Theme Check to prevent flash of wrong theme -->
+
     <script>
         const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            document.documentElement.setAttribute('data-theme', savedTheme);
-        }
+        if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
     </script>
 </head>
 <body id="top">
 
-    <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-content">
-            <a href="#home" class="logo">
-                <i class="fa-solid fa-terminal"></i> Kevin<span class="logo-lastname"> Kipkorir</span>
-            </a>
-            
-            <!-- Desktop Nav -->
+            <a href="/" class="logo"><i class="fa-solid fa-terminal"></i> Kevin<span class="logo-lastname"> Kipkorir</span></a>
             <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#experience">Experience</a>
-                <a href="#projects">Projects</a>
-                <a href="#blogs">Blogs</a>
-                <a href="https://drive.google.com/file/d/1kOpMxXG0q_DeF6cADoo3HQC8g_mOgfJZ/view?usp=drive_link" target="_blank" class="btn-outline">Resume</a>
-                <a href="#contact" class="btn-outline">Contact</a>
-                <button id="theme-toggle" aria-label="Toggle Dark Mode">
-                    <i class="fa-solid fa-moon"></i>
-                </button>
+                <a href="/about/">About</a>
+                <a href="/blog/">Blog</a>
+                <a href="/projects">Projects</a>
+                <a href="/#contact" class="btn-outline">Contact</a>
+                <a href="/resume/" class="btn-outline">Resume</a>
+                <button id="theme-toggle" aria-label="Toggle Dark Mode"><i class="fa-solid fa-moon"></i></button>
             </div>
-
-            <!-- Mobile Hamburger Button -->
-            <button id="mobile-menu-btn" aria-label="Toggle Menu">
-                <i class="fa-solid fa-bars"></i>
-            </button>
+            <button id="mobile-menu-btn" aria-label="Toggle Menu"><i class="fa-solid fa-bars"></i></button>
         </div>
-
-        <!-- Mobile Menu Dropdown -->
         <div class="mobile-nav" id="mobile-nav">
-            <a href="#about">About</a>
-            <a href="#experience">Experience</a>
-            <a href="#projects">Projects</a>
-            <a href="#blogs">Blogs</a>
-            <a href="https://drive.google.com/file/d/1kOpMxXG0q_DeF6cADoo3HQC8g_mOgfJZ/view?usp=drive_link" target="_blank">Resume</a>
-            <a href="#contact">Contact</a>
-            <button id="mobile-theme-toggle" aria-label="Toggle Dark Mode">
-                <i class="fa-solid fa-moon"></i> Toggle Theme
-            </button>
+            <a href="/about/">About</a>
+            <a href="/blog/">Blog</a>
+            <a href="/projects">Projects</a>
+            <a href="/#contact">Contact</a>
+            <a href="/resume/">Resume</a>
+            <button id="mobile-theme-toggle" aria-label="Toggle Dark Mode"><i class="fa-solid fa-moon"></i> Toggle Theme</button>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
             <h1 class="greeting">Hi, I'm</h1>
@@ -74,75 +51,28 @@
                 I am a recent <strong>Electrical & Electronic Engineering graduate</strong> with hands-on experience in Tier-1 Network Operations. I am working towards ensuring high availability in live production environments. As the industry shifts towards Software-Defined Networking (SDN) and Cloud-Native architecture, I am leveraging Linux, Python, and Containerization tools to manage the next generation of scalable systems.
             </p>
             <div class="hero-cta">
-                <a href="#projects" class="btn-primary">View My Work</a>
-                <a href="#blogs" class="btn-secondary">Read the Blog</a>
+                <a href="/projects" class="btn-primary">View My Work</a>
+                <a href="/blog/" class="btn-secondary">Read the Blog</a>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="section">
-        <h2 class="section-title"><span class="gradient-text">About Me</span></h2>
-        <div class="section-content">
-            <p>
-                I recently graduated with a degree in Electrical & Electronic Engineering and gained direct industry experience monitoring live Tier-1 enterprise infrastructure at Huawei. That experience taught me firsthand how critical network stability, observability, and incident response are. It also showed me that whether you are running a telecom core, a banking database, or a cloud platform, the core requirement is always the same: zero downtime.
-            </p>
-            <p>
-                Currently, I hold an <strong>AWS Certified Cloud Practitioner</strong> certification and am building a strong foundation in Linux systems administration, containerization with Docker, and CI/CD pipelines. My networking foundation covers TCP/IP and UDP suites, essential services like DNS and DHCP, and hands-on exposure to VLAN configuration and basic routing.. My goal is to bridge the gap between legacy telecom infrastructure and modern cloud architectures. I write about this transition in my <a href="#blogs">Blogs</a>.
-            </p>
-            <p>Here are a few technologies I've been working with recently:</p>
-            
-            <!-- Boxed Skills Grid -->
-            <div class="skills-grid">
-                <div class="skill-box">
-                    <h4>Core Networking</h4>
-                    <p>TCP/IP, UDP, DNS, DHCP, VLANs, Subnetting</p>
-                </div>
-                <div class="skill-box">
-                    <h4>Routing & Switching</h4>
-                    <p>BGP, OSPF, IS-IS, MPLS (Concepts)</p>
-                </div>
-                <div class="skill-box">
-                    <h4>Network Ops & Tools</h4>
-                    <p>NOC/SOC, SNMP, Wireshark, Ping/Traceroute</p>
-                </div>
-                <div class="skill-box">
-                    <h4>Automation & Cloud</h4>
-                    <p>Linux, Docker, AWS (CCP), Python, CI/CD</p>
-                </div>
-                <div class="skill-box">
-                    <h4>Currently Exploring</h4>
-                    <p>SDN, Kubernetes, Prometheus, Ansible</p>
-                </div>
-            </div>
-            
+    <section id="featured" class="section">
+        <h2 class="section-title"><span class="gradient-text">Featured Writing</span></h2>
+        <p class="section-subtitle">Selected Notes on infrastructure, debugging, and systems engineering.</p>
+        <div class="blog-list">
+            <!-- FEATURED:START -->
+            <!-- FEATURED:END -->
+        </div>
+        <div style="margin-top: 30px;">
+            <a href="/blog/" class="btn-secondary">Read all posts <i class="fa-solid fa-arrow-right"></i></a>
         </div>
     </section>
 
-    <!-- Experience Section -->
-    <section id="experience" class="section">
-        <h2 class="section-title"><span class="gradient-text">Experience</span></h2>
-        <div class="experience-card">
-            <div class="exp-header">
-                <h3>Service Operations Centre (SOC) Intern</h3>
-                <span class="exp-date">Jul 2025 - Oct 2025</span>
-            </div>
-            <h4 class="exp-company">Huawei Kenya (Safaricom Account)</h4>
-            <ul class="exp-details">
-                <li>Delivered L1/L2 technical support for Safaricom's Tier-1 live enterprise infrastructure, ensuring high network availability.</li>
-                <li>Analyzed data from SmartCare/SEQ monitoring platforms to identify service anomalies and generated actionable KPI/CEM reports.</li>
-                <li>Utilized network monitoring tools and protocol analysis (SNMP, TCP/IP) to diagnose connectivity issues and escalate complex routing anomalies to senior engineers.</li>
-                <li>Assisted in physical server installation, configuration, and incident escalation within live data center environments.</li>
-                <li>Utilized SQL to extract network performance data, translating technical findings into clear documentation for management.</li>
-            </ul>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
     <section id="projects" class="section">
         <h2 class="section-title"><span class="gradient-text">Projects</span></h2>
         <div class="project-grid">
-            
+
             <div class="project-card">
                 <div class="project-header">
                     <h3><i class="fa-solid fa-server project-icon"></i> Infrastructure Lab</h3>
@@ -154,8 +84,11 @@
                 <div class="project-tech">
                     <span>Docker</span>
                     <span>GitHub Actions</span>
-                    <span>MkDocs</span>
                     <span>Linux</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/kevzkip/infra-lab" target="_blank">View repo <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="/blog/?project=infra-lab">Read the write-ups <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
             </div>
 
@@ -172,69 +105,30 @@
                     <span>LoRa</span>
                     <span>IoT</span>
                 </div>
+                <div class="project-links">
+                    <a href="/blog/?project=lora-irrigation">Read the write-ups <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
             </div>
 
         </div>
-    </section>
-
-    <!-- Blogs Section -->
-    <section id="blogs" class="section">
-        <h2 class="section-title"><span class="gradient-text">Engineering Blog</span></h2>
-        <p class="section-subtitle">I write about infrastructure, debugging, and systems engineering. Here are my latest posts.</p>
-        
-        <div class="blog-list">
-            <a href="https://kevzkip.github.io/infra-lab/blog/2026/10/16/strict-builds/" class="blog-item">
-                <div class="blog-meta">
-                    <span class="blog-date">Oct 16, 2026</span>
-                    <span class="blog-read-time"><i class="fa-regular fa-clock"></i> 5 min read</span>
-                </div>
-                <h3 class="blog-title">Containerizing MkDocs & Strict CI/CD</h3>
-                <p class="blog-excerpt">
-                    How I migrated a basic static site to a Dockerized environment with strict GitHub Actions pipelines, and the lessons learned about WSL filesystem bottlenecks.
-                </p>
-                <div class="project-tech">
-                    <span>Docker</span>
-                    <span>CI/CD</span>
-                </div>
-            </a>
-            
-            <a href="https://kevzkip.github.io/infra-lab/blog/" class="blog-item">
-                <div class="blog-meta">
-                    <span class="blog-date">View All</span>
-                </div>
-                <h3 class="blog-title">Visit the Infra Lab Blog</h3>
-                <p class="blog-excerpt">
-                    Read all my deep dives, post-mortems, and notes on Linux, containerization, and cloud infrastructure.
-                </p>
-                <div class="project-tech">
-                    <span>Systems</span>
-                    <span>Linux</span>
-                </div>
-            </a>
+        <div style="margin-top: 40px;">
+            <a href="/projects/" class="btn-secondary">View all projects <i class="fa-solid fa-arrow-right"></i></a>
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact" class="section">
         <h2 class="section-title"><span class="gradient-text">Get In Touch</span></h2>
         <p class="section-subtitle">I'm currently seeking internship or entry-level opportunities in Network Operations (NOC), Telecommunications, Cloud Infrastructure Support, or Systems Administration. Send a message, my inbox is always open.</p>
-        
+
         <form id="contact-form" action="https://formspree.io/f/xgvanrne" method="POST" class="contact-form">
-            <div class="form-group">
-                <input type="text" name="name" placeholder="Your Name" required>
-            </div>
-            <div class="form-group">
-                <input type="email" name="email" placeholder="Your Email" required>
-            </div>
-            <div class="form-group">
-                <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-            </div>
+            <div class="form-group"><input type="text" name="name" placeholder="Your Name" required></div>
+            <div class="form-group"><input type="email" name="email" placeholder="Your Email" required></div>
+            <div class="form-group"><textarea name="message" placeholder="Your Message" rows="5" required></textarea></div>
             <button type="submit" class="btn-primary">Send Message</button>
             <p id="form-status"></p>
         </form>
     </section>
 
-    <!-- Footer & Socials -->
     <footer>
         <div class="social-links">
             <a href="https://github.com/kevzkip" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
@@ -244,11 +138,7 @@
         <p class="copyright">&copy; 2026 Kevin Kipkorir. All rights reserved.</p>
     </footer>
 
-    <!-- Back to Top Arrow -->
-    <a href="#top" class="back-to-top" id="back-to-top" aria-label="Back to Top">
-        <i class="fa-solid fa-arrow-up"></i>
-    </a>
-
+    <a href="#top" class="back-to-top" id="back-to-top" aria-label="Back to Top"><i class="fa-solid fa-arrow-up"></i></a>
     <script src="script.js"></script>
 </body>
 </html>

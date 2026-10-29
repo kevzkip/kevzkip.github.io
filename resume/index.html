@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resume | Kevin Kipkorir</title>
+    <meta
+      name="description"
+      content="Resume of Kevin Kipkorir — Network Operations & Cloud Infrastructure."
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+    <script>
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme)
+        document.documentElement.setAttribute("data-theme", savedTheme);
+    </script>
+  </head>
+  <body id="top">
+    <nav id="navbar">
+      <div class="nav-content">
+        <a href="/" class="logo"
+          ><i class="fa-solid fa-terminal"></i> Kevin<span
+            class="logo-lastname"
+          >
+            Kipkorir</span
+          ></a
+        >
+        <div class="nav-links">
+          <a href="/about/">About</a>
+          <a href="/blog/">Blog</a>
+          <a href="/projects">Projects</a>
+          <a href="/#contact" class="btn-outline">Contact</a>
+          <a href="/resume/" class="btn-outline active">Resume</a>
+          <button id="theme-toggle" aria-label="Toggle Dark Mode">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+        </div>
+        <button id="mobile-menu-btn" aria-label="Toggle Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+      <div class="mobile-nav" id="mobile-nav">
+        <a href="/about/">About</a>
+        <a href="/blog/">Blog</a>
+        <a href="/projects">Projects</a>
+        <a href="/#contact">Contact</a>
+        <a href="/resume/">Resume</a>
+        <button id="mobile-theme-toggle" aria-label="Toggle Dark Mode">
+          <i class="fa-solid fa-moon"></i> Toggle Theme
+        </button>
+      </div>
+    </nav>
+
+    <main class="page">
+      <section class="section">
+        <div class="resume-header">
+          <div class="resume-header-top">
+            <div>
+              <h1>Resume</h1>
+              <p class="resume-title">
+                A quick look at my experience, projects, and skills.
+              </p>
+            </div>
+            <div class="resume-actions">
+              <a
+                href="/resume/Kevin-Kipkorir-Resume.pdf"
+                target="_blank"
+                class="btn-secondary"
+              >
+                <i class="fa-solid fa-up-right-from-square"></i> Open PDF
+              </a>
+              <a
+                href="/resume/Kevin-Kipkorir-Resume.pdf"
+                download
+                class="btn-primary"
+              >
+                <i class="fa-solid fa-download"></i> Download
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" style="padding-top: 0; border-top: none">
+        <div class="pdf-viewer-container">
+          <iframe
+            src="/resume/Kevin-Kipkorir-Resume.pdf#view=FitH"
+            class="pdf-frame"
+            title="Kevin Kipkorir Resume PDF"
+          >
+            <p>
+              Your browser does not support PDFs.
+              <a href="/resume/Kevin-Kipkorir-Resume.pdf">Download the PDF</a>
+              instead.
+            </p>
+          </iframe>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="social-links">
+        <a href="https://github.com/kevzkip" target="_blank" aria-label="GitHub"
+          ><i class="fa-brands fa-github"></i
+        ></a>
+        <a
+          href="https://www.linkedin.com/in/kevinkip"
+          target="_blank"
+          aria-label="LinkedIn"
+          ><i class="fa-brands fa-linkedin"></i
+        ></a>
+        <a href="mailto:kevinlangat12490@gmail.com" aria-label="Email"
+          ><i class="fa-solid fa-envelope"></i
+        ></a>
+      </div>
+      <p class="copyright">&copy; 2026 Kevin Kipkorir. All rights reserved.</p>
+    </footer>
+
+    <a href="#top" class="back-to-top" id="back-to-top" aria-label="Back to Top"
+      ><i class="fa-solid fa-arrow-up"></i
+    ></a>
+    <script src="/script.js"></script>
+  </body>
+</html>

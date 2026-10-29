@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog | Kevin Kipkorir</title>
+  <meta name="description" content="Notes on network operations, cloud infrastructure, and the projects I'm building.">
+  <link rel="canonical" href="https://kevzkip.github.io/blog/">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+
+  <script>
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+  </script>
+</head>
+<body id="top">
+
+  <nav id="navbar">
+    <div class="nav-content">
+      <a href="/" class="logo"><i class="fa-solid fa-terminal"></i> Kevin<span class="logo-lastname"> Kipkorir</span></a>
+      <div class="nav-links">
+        <a href="/about/">About</a>
+        <a href="/blog/">Blog</a>
+        <a href="/projects">Projects</a>
+        <a href="/#contact" class="btn-outline">Contact</a>
+        <a href="/resume/" class="btn-outline">Resume</a>
+        <button id="theme-toggle" aria-label="Toggle Dark Mode"><i class="fa-solid fa-moon"></i></button>
+      </div>
+      <button id="mobile-menu-btn" aria-label="Toggle Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+    <div class="mobile-nav" id="mobile-nav">
+      <a href="/about/">About</a>
+      <a href="/blog/">Blog</a>
+      <a href="/projects">Projects</a>
+      <a href="/#contact">Contact</a>
+      <a href="/resume/">Resume</a>
+      <button id="mobile-theme-toggle" aria-label="Toggle Dark Mode"><i class="fa-solid fa-moon"></i> Toggle Theme</button>
+    </div>
+  </nav>
+
+  <main class="page">
+    <section class="section">
+      <h2 class="section-title"><span class="gradient-text">Blog</span></h2>
+      <p class="section-subtitle">Notes and project logs on infrastructure, debugging, and systems engineering.</p>
+
+      <div class="filter-bar" id="filter-bar">
+        <a href="/blog/" class="filter-btn" data-filter="all">All</a>
+        <a href="/blog/?type=Notes" class="filter-btn" data-filter="Notes">Notes</a>
+        <a href="/blog/?type=project" class="filter-btn" data-filter="project">Project logs</a>
+      </div>
+
+      <div class="blog-list" id="post-list">
+        {{POST_CARDS}}
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="social-links">
+      <a href="https://github.com/kevzkip" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/kevinkip" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+      <a href="mailto:kevinlangat12490@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+    </div>
+    <p class="copyright">&copy; 2026 Kevin Kipkorir. All rights reserved.</p>
+  </footer>
+
+  <a href="#top" class="back-to-top" id="back-to-top" aria-label="Back to Top"><i class="fa-solid fa-arrow-up"></i></a>
+  <script src="/script.js"></script>
+</body>
+</html>

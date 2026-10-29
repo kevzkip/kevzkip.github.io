@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Why I dropped MkDocs for raw Markdown | Kevin Kipkorir</title>
+    <meta name="description" content="Simpler builds, no config, and a clearer separation between content and tooling." />
+    <link rel="canonical" href="https://kevzkip.github.io/blog/why-i-dropped-mkdocs/" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+
+    <script>
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme)
+        document.documentElement.setAttribute("data-theme", savedTheme);
+    </script>
+  </head>
+  <body id="top">
+    <nav id="navbar">
+      <div class="nav-content">
+        <a href="/" class="logo"
+          ><i class="fa-solid fa-terminal"></i> Kevin<span
+            class="logo-lastname"
+          >
+            Kipkorir</span
+          ></a
+        >
+        <div class="nav-links">
+          <a href="/about/">About</a>
+          <a href="/blog/">Blog</a>
+          <a href="/projects">Projects</a>
+          <a href="/#contact" class="btn-outline">Contact</a>
+          <a href="/resume/" class="btn-outline">Resume</a>
+          <button id="theme-toggle" aria-label="Toggle Dark Mode">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+        </div>
+        <button id="mobile-menu-btn" aria-label="Toggle Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+      <div class="mobile-nav" id="mobile-nav">
+        <a href="/about/">About</a>
+        <a href="/blog/">Blog</a>
+        <a href="/projects">Projects</a>
+        <a href="/#contact">Contact</a>
+        <a href="/resume/">Resume</a>
+        <button id="mobile-theme-toggle" aria-label="Toggle Dark Mode">
+          <i class="fa-solid fa-moon"></i> Toggle Theme
+        </button>
+      </div>
+    </nav>
+
+    <!-- Progress Bar at the very top of the page -->
+    <div id="reading-progress"></div>
+
+    <main class="post-page">
+      <div class="post-layout">
+        <!-- Main Article -->
+        <article class="post-content">
+          <header class="post-header">
+            <div class="post-meta"><span class="blog-date">Oct 16, 2026</span></div>
+            
+            <h1>Why I dropped MkDocs for raw Markdown</h1>
+            <p class="post-description">Simpler builds, no config, and a clearer separation between content and tooling.</p>
+          </header>
+          <div class="post-body"><p>I started my infra-lab docs with MkDocs because it looked like the &quot;right&quot; way to publish Markdown. But the moment I tried to wire it into a GitHub Action, I ran into the same friction every time: another config file to maintain, another dependency to pin, another upgrade that broke my theme.</p>
+<p>So I dropped it.</p>
+<h2>What changed</h2>
+<p>Raw Markdown in a <code>_posts/</code> folder, a tiny build script, and GitHub Actions. That&#39;s the whole stack now.</p>
+<p>The build step does one thing: read Markdown, render HTML. No themes, no plugins, no <code>mkdocs.yml</code>. If I want to change the output, I change a template — not a framework.</p>
+<h2>What I kept</h2>
+<ul>
+<li>Markdown as the single source of truth.</li>
+<li>Git as the editor. Every change is a diff, every post is a commit.</li>
+<li>Static HTML as the output. Fast, portable, and it works on any host.</li>
+</ul>
+<h2>What I lost</h2>
+<ul>
+<li>Search, sidebar navigation, and versioned docs. All of which I wasn&#39;t using anyway.</li>
+</ul>
+<p>The lesson: pick the tool that matches the size of the problem, not the size of the ecosystem.</p>
+</div>
+          <footer class="post-footer">
+            <div class="project-tech"><span>tooling</span><span>markdown</span><span>ci-cd</span></div>
+            <a href="/blog/" class="btn-secondary"
+              ><i class="fa-solid fa-arrow-left"></i> All posts</a
+            >
+          </footer>
+        </article>
+
+        <!-- Sticky Sidebar (On this page) -->
+        <aside class="post-sidebar">
+          <nav class="toc-container">
+            <h4 class="toc-title">On this page</h4>
+            <ul id="toc-list">
+              <!-- JavaScript will inject the list of headings here -->
+            </ul>
+          </nav>
+        </aside>
+      </div>
+    </main>
+
+    <footer>
+      <div class="social-links">
+        <a href="https://github.com/kevzkip" target="_blank" aria-label="GitHub"
+          ><i class="fa-brands fa-github"></i
+        ></a>
+        <a
+          href="https://www.linkedin.com/in/kevinkip"
+          target="_blank"
+          aria-label="LinkedIn"
+          ><i class="fa-brands fa-linkedin"></i
+        ></a>
+        <a href="mailto:kevinlangat12490@gmail.com" aria-label="Email"
+          ><i class="fa-solid fa-envelope"></i
+        ></a>
+      </div>
+      <p class="copyright">&copy; 2026 Kevin Kipkorir. All rights reserved.</p>
+    </footer>
+
+    <a href="#top" class="back-to-top" id="back-to-top" aria-label="Back to Top"
+      ><i class="fa-solid fa-arrow-up"></i
+    ></a>
+    <script src="/script.js"></script>
+  </body>
+</html>

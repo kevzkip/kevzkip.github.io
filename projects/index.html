@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Kevin Kipkorir</title>
+    <meta name="description" content="Technical projects by Kevin Kipkorir.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <script>
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+</head>
+<body id="top">
+    <nav id="navbar">
+        <div class="nav-content">
+            <a href="/" class="logo"><i class="fa-solid fa-terminal"></i> Kevin<span class="logo-lastname"> Kipkorir</span></a>
+            <div class="nav-links">
+                <a href="/about/">About</a>
+                <a href="/blog/">Blog</a>
+                <a href="/projects/">Projects</a>
+                <a href="/#contact" class="btn-outline">Contact</a>
+                <a href="/resume/" class="btn-outline">Resume</a>
+                <button id="theme-toggle" aria-label="Toggle Dark Mode"><i class="fa-solid fa-moon"></i></button>
+            </div>
+            <button id="mobile-menu-btn" aria-label="Toggle Menu"><i class="fa-solid fa-bars"></i></button>
+        </div>
+        <div class="mobile-nav" id="mobile-nav">
+            <a href="/about/">About</a>
+            <a href="/blog/">Blog</a>
+            <a href="/projects/">Projects</a>
+            <a href="/#contact">Contact</a>
+            <a href="/resume/">Resume</a>
+            <button id="mobile-theme-toggle" aria-label="Toggle Dark Mode"><i class="fa-solid fa-moon"></i> Toggle Theme</button>
+        </div>
+    </nav>
+
+    <main class="page">
+        <section class="section">
+            <h2 class="section-title"><span class="gradient-text">All Projects</span></h2>
+            <p class="section-subtitle">A collection of things I've built, broken, and fixed.</p>
+            
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3><i class="fa-solid fa-server project-icon"></i> Infrastructure Lab</h3>
+                        <a href="https://github.com/kevzkip/infra-lab" target="_blank" class="icon-link" aria-label="GitHub Repo"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                    <p class="project-desc">
+                        An engineering log and documentation platform built to practice modern CI/CD and containerization. I use this lab to apply DevOps concepts (Docker, GitHub Actions, Linux) to real-world scenarios, ensuring infrastructure is deployed consistently and reliably.
+                    </p>
+                    <div class="project-tech">
+                        <span>Docker</span>
+                        <span>GitHub Actions</span>
+                        <span>Linux</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/kevzkip/infra-lab" target="_blank">View repo <i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="/blog/?project=infra-lab">Read the write-ups <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3><i class="fa-solid fa-microchip project-icon"></i> LoRa Smart Irrigation</h3>
+                    </div>
+                    <p class="project-desc">
+                        Engineered a remote sensor data transmission system using ESP32 and SX1278 LoRa modules. Achieved reliable communication up to 800m urban NLOS range for IoT-based monitoring.
+                    </p>
+                    <div class="project-tech">
+                        <span>ESP32</span>
+                        <span>C++</span>
+                        <span>LoRa</span>
+                        <span>IoT</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="/blog/?project=lora-irrigation">Read the write-ups <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- Add more projects here later -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/kevzkip" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/kevinkip" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="mailto:kevinlangat12490@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+        <p class="copyright">&copy; 2026 Kevin Kipkorir. All rights reserved.</p>
+    </footer>
+
+    <a href="#top" class="back-to-top" id="back-to-top" aria-label="Back to Top"><i class="fa-solid fa-arrow-up"></i></a>
+    <script src="/script.js"></script>
+</body>
+</html>

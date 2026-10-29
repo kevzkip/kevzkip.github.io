@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Write a Post</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <script>
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+</head>
+<body id="top">
+
+    <!-- 1. LOCK SCREEN -->
+    <div id="lock-screen" style="display: flex; height: 100vh; align-items: center; justify-content: center; flex-direction: column;">
+        <h2 style="font-family: var(--font-mono); margin-bottom: 20px; color: var(--text-main);">Restricted Area</h2>
+        <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.9rem;">Enter passcode to unlock the editor.</p>
+        <input type="password" id="passcode" placeholder="Passcode" style="padding: 12px; border-radius: 4px; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); margin-bottom: 15px; width: 250px; text-align: center;">
+        <button onclick="unlock()" class="btn-primary" style="width: 250px; justify-content: center;">Unlock</button>
+    </div>
+
+    <!-- 2. THE WRITING FORM -->
+    <main id="admin-panel" style="display: none; max-width: 800px; margin: 0 auto; padding: 40px 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+            <h2 class="section-title" style="margin: 0;"><span class="gradient-text">Write a New Post</span></h2>
+            <a href="/" class="btn-secondary"><i class="fa-solid fa-arrow-left"></i> Back</a>
+        </div>
+
+        <form id="post-form" class="contact-form" style="max-width: 100%;">
+            
+            <div class="form-group" style="background: var(--bg-card); padding: 15px; border-radius: 6px; border: 1px solid var(--border-color);">
+                <label style="color: var(--text-main); font-size: 0.9rem; margin-bottom: 5px; display: block;">GitHub Token (saved only on this device)</label>
+                <input type="password" id="github-token" placeholder="github_pat_..." required>
+            </div>
+
+            <div class="form-group">
+                <label style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; display: block;">Title</label>
+                <input type="text" id="post-title" placeholder="My Awesome Project" required>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div class="form-group">
+                    <label style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; display: block;">Date</label>
+                    <input type="date" id="post-date" required>
+                </div>
+                <div class="form-group">
+                    <label style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; display: block;">Type</label>
+                    <select id="post-type" style="width: 100%; padding: 12px; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 4px; color: var(--text-main); font-family: var(--font-sans);">
+                        <option value="notes">Notes (Thoughts/Notes)</option>
+                        <option value="project">Project Log</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; display: block;">Description (1 sentence)</label>
+                <input type="text" id="post-desc" placeholder="A short summary for the blog list..." required>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div class="form-group">
+                    <label style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; display: block;">Project Slug (optional)</label>
+                    <input type="text" id="post-project" placeholder="e.g. infra-lab">
+                </div>
+                <div class="form-group">
+                    <label style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; display: block;">Tags (comma separated)</label>
+                    <input type="text" id="post-tags" placeholder="docker, linux, ci-cd">
+                </div>
+            </div>
+
+            <div class="form-group" style="flex-direction: row; align-items: center; gap: 10px; display: flex; margin-top: 10px;">
+                <input type="checkbox" id="post-featured" style="width: auto; transform: scale(1.5);">
+                <label for="post-featured" style="color: var(--text-main); font-size: 0.95rem; cursor: pointer;">Feature this post on the homepage?</label>
+            </div>
+
+            <div class="form-group">
+                <label style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; display: block;">Content (Markdown)</label>
+                <textarea id="post-content" rows="18" placeholder="Write your markdown here..." required style="font-family: var(--font-mono); font-size: 0.9rem;"></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary" id="submit-btn" style="width: 100%; justify-content: center; padding: 15px; font-size: 1rem;">
+                <i class="fa-solid fa-paper-plane"></i> Publish Post
+            </button>
+            <p id="form-status" style="text-align: center; margin-top: 10px;"></p>
+        </form>
+    </main>
+
+    <!-- Unlock Logic -->
+    <script>
+        const SECRET_PASSCODE = "kevzkip-admin-2026"; // ⭐ CHANGE THIS TO YOUR OWN SECRET WORD
+
+        function unlock() {
+            const input = document.getElementById('passcode').value;
+            if (input === SECRET_PASSCODE) {
+                document.getElementById('lock-screen').style.display = 'none';
+                document.getElementById('admin-panel').style.display = 'block';
+            } else {
+                alert("Incorrect passcode.");
+            }
+        }
+    </script>
+    <script src="/blog-admin/admin.js"></script>
+</body>
+</html>
