@@ -82,12 +82,28 @@ document.addEventListener('DOMContentLoaded', () => {
         if (html.getAttribute('data-theme') !== 'light') startMatrix();
     }
 
-    // Mobile Menu
+        // Mobile Menu
     const mobileBtn = document.getElementById('mobile-menu-toggle');
     const mobileNav = document.getElementById('mobile-nav');
     if (mobileBtn && mobileNav) {
-        mobileBtn.addEventListener('click', () => {
+        // Toggle menu on button click
+        mobileBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Stop the click from bubbling to the document
             mobileNav.style.display = mobileNav.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (mobileNav.style.display === 'flex' && !mobileNav.contains(e.target) && !mobileBtn.contains(e.target)) {
+                mobileNav.style.display = 'none';
+            }
+        });
+        
+        // Close menu when a link is clicked
+        mobileNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.style.display = 'none';
+            });
         });
     }
 
