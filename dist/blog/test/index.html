@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test | Kevin Kipkorir</title>
+  <meta name="description" content="Test 1">
+  <link rel="canonical" href="https://kevzkip.github.io/blog/test/">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+  <link rel="stylesheet" href="/styles.css">
+  <script>const savedTheme = localStorage.getItem('theme'); if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);</script>
+</head>
+<body>
+  <canvas id="matrix-canvas"></canvas>
+  <div id="reading-progress"></div>
+
+  <header class="site-header">
+      <div class="header-inner">
+          <a href="/" class="brand"><i class="fa-solid fa-terminal"></i> KK</a>
+          <nav class="nav-menu">
+              <a href="/" class="nav-item"><i class="fa-solid fa-house"></i> Home</a><a href="/about/" class="nav-item"><i class="fa-solid fa-user"></i> About</a>
+              <a href="/blog/" class="nav-item"><i class="fa-solid fa-pen-nib"></i> Blog</a><a href="/projects/" class="nav-item"><i class="fa-solid fa-folder-open"></i> Projects</a>
+              <a href="/#contact" class="nav-item"><i class="fa-solid fa-envelope"></i> Contact</a><a href="/resume/" class="nav-item"><i class="fa-solid fa-file-pdf"></i> Resume</a>
+          </nav>
+          <div class="header-actions">
+              <button id="cmd-trigger" class="icon-btn"><i class="fa-solid fa-terminal"></i> <kbd>⌘K</kbd></button>
+              <button id="terminal-trigger" class="icon-btn terminal-icon">&gt;_</button>
+              <button id="theme-toggle" class="icon-btn"><i class="fa-solid fa-moon"></i></button>
+              <button id="mobile-menu-toggle" class="icon-btn"><i class="fa-solid fa-bars"></i></button>
+          </div>
+      </div>
+      <div class="mobile-nav" id="mobile-nav">
+          <a href="/"><i class="fa-solid fa-house"></i> Home</a><a href="/about/"><i class="fa-solid fa-user"></i> About</a>
+          <a href="/blog/"><i class="fa-solid fa-pen-nib"></i> Blog</a><a href="/projects/"><i class="fa-solid fa-folder-open"></i> Projects</a>
+          <a href="/#contact"><i class="fa-solid fa-envelope"></i> Contact</a><a href="/resume/"><i class="fa-solid fa-file-pdf"></i> Resume</a>
+      </div>
+  </header>
+
+  <main class="main-wrapper">
+    <div class="post-layout">
+      <article>
+        <header class="post-header">
+          <div class="post-meta"><span>Oct 29, 2026</span></div>
+          <div class="project-meta">
+         <a href="/blog/?type=notes" class="project-badge" style="color: #a78bfa; border-color: #a78bfa;">Notes</a>
+       </div>
+          <h1>Test</h1>
+          <p class="hero-bio">Test 1</p>
+        </header>
+        <div class="post-body"><p>##TESTING
+test
+#tested</p>
+</div>
+        <footer class="post-footer">
+          <div class="card-tags"><a href="/blog/?tag=testtag" class="post-tag">testtag</a><a href="/blog/?tag=testtag" class="post-tag">testtag</a></div>
+          <a href="/blog/" class="btn-secondary"><i class="fa-solid fa-arrow-left"></i> All posts</a>
+        </footer>
+      </article>
+      <aside class="post-sidebar">
+        <nav>
+          <h4 class="toc-title">On this page</h4>
+          <ul id="toc-list"></ul>
+        </nav>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+      <div class="social-links">
+          <a href="https://github.com/kevzkip" target="_blank"><i class="fa-brands fa-github"></i></a><a href="https://www.linkedin.com/in/kevinkip" target="_blank"><i class="fa-brands fa-linkedin"></i></a><a href="mailto:kevinlangat12490@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+      <p class="copyright">&copy; 2026 Kevin Kipkorir.</p>
+  </footer>
+
+  <div id="cmd-modal" class="modal-overlay">
+      <div class="cmd-palette-card">
+          <div class="cmd-search-wrap"><i class="fa-solid fa-magnifying-glass" style="color: var(--text-muted);"></i><input type="text" id="cmd-input" placeholder="Type a command or search..." autocomplete="off"><kbd style="font-size: 0.7rem; color: var(--text-muted); border: 1px solid var(--border-color); padding: 2px 6px; border-radius: 4px;">ESC</kbd></div>
+          <div class="cmd-results-list">
+              <a href="/about/" class="cmd-item"><i class="fa-solid fa-user"></i><span class="cmd-item-title">Go to About</span><span class="cmd-item-tag">Page</span></a>
+              <a href="/blog/" class="cmd-item"><i class="fa-solid fa-pen-nib"></i><span class="cmd-item-title">Read the Blog</span><span class="cmd-item-tag">Page</span></a>
+              <a href="/projects/" class="cmd-item"><i class="fa-solid fa-folder-open"></i><span class="cmd-item-title">View All Projects</span><span class="cmd-item-tag">Page</span></a>
+              <a href="/resume/" class="cmd-item"><i class="fa-solid fa-file-pdf"></i><span class="cmd-item-title">View Resume</span><span class="cmd-item-tag">PDF</span></a>
+          </div>
+      </div>
+  </div>
+  <div id="terminal-modal" class="modal-overlay">
+      <div class="terminal-card">
+          <div class="terminal-header"><div class="term-dot term-close" id="term-close-btn"></div><div class="term-dot term-min"></div><div class="term-dot term-max"></div><div class="term-title">guest@kk: ~</div></div>
+          <div class="terminal-body" id="terminal-output"><div>Welcome to Kevin's Terminal.</div><div>Type <span style="color:#fff">'help'</span> to begin.</div><br></div>
+          <div class="terminal-input-line"><span class="terminal-prompt">guest@kk:~$</span><input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false"></div>
+      </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="/script.js"></script>
+</body>
+</html>

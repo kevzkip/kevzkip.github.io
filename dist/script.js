@@ -1,4 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize Syntax Highlighting
+    if (typeof hljs !== 'undefined') {
+        hljs.highlightAll();
+    }
+
     const html = document.documentElement;
 
     // Theme Toggle
@@ -32,30 +37,28 @@ document.addEventListener('DOMContentLoaded', () => {
         const ctx = canvas.getContext('2d');
         const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+'.split('');
         const fontSize = 16;
-        const columnSpacing = fontSize * 3; // Spread columns out by 3x
+        const columnSpacing = fontSize * 3;
         let columns, drops;
 
         const resizeCanvas = () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            columns = canvas.width / columnSpacing; // Much fewer columns
+            columns = canvas.width / columnSpacing;
             drops = [];
             for (let x = 0; x < columns; x++) drops[x] = 1;
         };
 
         const drawMatrix = () => {
-            ctx.fillStyle = 'rgba(9, 9, 11, 0.08)'; // Slightly faster trail fade
+            ctx.fillStyle = 'rgba(9, 9, 11, 0.08)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = '#46b66f';
             ctx.font = fontSize + 'px monospace';
             
             for (let i = 0; i < drops.length; i++) {
-                // Randomly skip drawing to create gaps
                 if (Math.random() > 0.3) {
                     const text = chars[Math.floor(Math.random() * chars.length)];
                     ctx.fillText(text, i * columnSpacing, drops[i] * fontSize);
                 }
-                
                 if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
                 drops[i]++;
             }
@@ -64,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const startMatrix = () => {
             stopMatrix();
             resizeCanvas();
-            matrixInterval = setInterval(drawMatrix, 130); // Slower speed (was 90)
+            matrixInterval = setInterval(drawMatrix, 130);
         };
 
         const stopMatrix = () => {

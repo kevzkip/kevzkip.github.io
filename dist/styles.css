@@ -156,9 +156,40 @@ h1, h2, h3, h4, .brand, .section-title { font-family: var(--font-heading); color
 .post-body a { color: var(--accent); text-decoration: underline; }
 .post-body ul, .post-body ol { margin: 1em 0 1em 1.5em; }
 .post-body li { margin-bottom: 0.4em; }
-.post-body code { font-family: var(--font-mono); font-size: 0.85em; background: var(--accent-glow); padding: 2px 6px; border-radius: 3px; color: var(--accent); }
-.post-body pre { background: #000; border: 1px solid var(--border-color); border-radius: 6px; padding: 16px; overflow-x: auto; margin: 1.5em 0; position: relative; }
-.post-body pre code { background: none; padding: 0; color: var(--text-main); }
+
+/* Inline code (stays theme-aware) */
+.post-body code:not(pre code) { 
+    font-family: var(--font-mono); 
+    font-size: 0.85em; 
+    background: var(--accent-glow); 
+    padding: 2px 6px; 
+    border-radius: 4px; 
+    color: var(--accent); 
+}
+
+/* The big code blocks (Always Dark) */
+.post-body pre { 
+    background: #0d1117 !important; /* GitHub Dark background */
+    border: 1px solid #30363d; 
+    border-left: 4px solid var(--accent); 
+    border-radius: 6px; 
+    padding: 16px; 
+    overflow-x: auto; 
+    margin: 1.5em 0; 
+    position: relative; 
+}
+
+/* Forces the text inside the big block to use the highlighter colors */
+.post-body pre code { 
+    background: transparent !important; 
+    padding: 0; 
+    color: #c9d1d9; /* GitHub Dark default text */
+    font-size: 0.9rem;
+    line-height: 1.5;
+    display: block;
+    font-family: var(--font-mono);
+}
+
 .post-body blockquote { border-left: 3px solid var(--accent); padding-left: 16px; margin: 1.5em 0; font-style: italic; }
 .post-body img { max-width: 100%; border-radius: 6px; margin: 1em 0; }
 .post-footer { margin-top: 40px; padding-top: 30px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
@@ -218,9 +249,25 @@ h1, h2, h3, h4, .brand, .section-title { font-family: var(--font-heading); color
 .terminal-prompt { color: var(--accent); margin-right: 10px; font-weight: bold; }
 .terminal-input { background: transparent; border: none; color: #fff; font-family: var(--font-mono); font-size: 0.9rem; outline: none; width: 100%; }
 
-.copy-code-btn { position: absolute; top: 10px; right: 10px; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-muted); padding: 4px 8px; font-size: 0.75rem; font-family: var(--font-mono); border-radius: 4px; cursor: pointer; transition: all 0.2s ease; opacity: 0; visibility: hidden; }
+/* Updated Copy Button for Dark Background */
+.copy-code-btn { 
+    position: absolute; 
+    top: 10px; 
+    right: 10px; 
+    background: #21262d; 
+    border: 1px solid #30363d; 
+    color: #c9d1d9; 
+    padding: 4px 8px; 
+    font-size: 0.75rem; 
+    font-family: var(--font-mono); 
+    border-radius: 4px; 
+    cursor: pointer; 
+    transition: all 0.2s ease; 
+    opacity: 0; 
+    visibility: hidden; 
+}
 .post-body pre:hover .copy-code-btn { opacity: 1; visibility: visible; }
-.copy-code-btn:hover { background: var(--border-color); color: var(--text-main); }
+.copy-code-btn:hover { background: #30363d; color: #ffffff; }
 .copy-code-btn.copied { background: var(--accent); color: #000; border-color: var(--accent); }
 
 /* Admin Panel */
