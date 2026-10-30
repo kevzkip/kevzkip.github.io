@@ -16,8 +16,7 @@ const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({
 const formatDate = (iso) =>
   new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 
-const renderTags = (tags = []) => tags.map((t) => `<span>${esc(t)}</span>`).join('');
-
+const renderTags = (tags = []) => tags.map((t) => `<a href="/blog/?tag=${esc(t)}" class="post-tag">${esc(t)}</a>`).join('');
 function copyRecursive(src, dest) {
   if (!fs.existsSync(src)) return;
   fs.mkdirSync(dest, { recursive: true });
@@ -57,7 +56,7 @@ const posts = fs.readdirSync(POSTS_DIR)
       date: data.date || dateFromFile,
       title: data.title,
       description: data.description || '',
-      type: data.type || 'Notes',
+      type: (data.type || 'notes').toLowerCase(), 
       project: data.project || '',
       tags: data.tags || [],
       featured: data.featured === true,
@@ -70,17 +69,18 @@ posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
 const card = (post) => {
   const badge = post.type === 'project'
-    ? `<span class="post-badge badge-project">Project${post.project ? ' · ' + esc(post.project) : ''}</span>`
-    : `<span class="post-badge badge-Notes">Notes</span>`;
-  return `<a href="/blog/${post.slug}/" class="blog-item" data-type="${post.type}"${post.project ? ` data-project="${esc(post.project)}"` : ''}>
+    ? `<a href="/blog/?type=project" class="post-badge badge-project">Project${post.project ? ' · ' + esc(post.project) : ''}</a>`
+    : `<a href="/blog/?type=notes" class="post-badge badge-notes">Notes</a>`;
+  
+  return `<div class="blog-item" data-type="${post.type}" data-tags="${post.tags.join(',')}"${post.project ? ` data-project="${esc(post.project)}"` : ''}>
       <div class="blog-meta">
         ${badge}
         <span class="blog-date">${formatDate(post.date)}</span>
       </div>
-      <h3 class="blog-title">${esc(post.title)}</h3>
+      <h3 class="blog-title"><a href="/blog/${post.slug}/">${esc(post.title)}</a></h3>
       <p class="blog-excerpt">${esc(post.description)}</p>
-      <div class="project-tech">${renderTags(post.tags)}</div>
-    </a>`;
+      <div class="card-tags">${renderTags(post.tags)}</div>
+    </div>`;
 };
 
 fs.rmSync(DIST_DIR, { recursive: true, force: true });
@@ -114,12 +114,14 @@ if (!indexHtml.includes('<!-- FEATURED:START -->')) {
 fs.writeFileSync(path.join(DIST_DIR, 'index.html'), indexHtml);
 
 for (const post of posts) {
-  const projectMeta = post.type === 'project'
+    const projectMeta = post.type === 'project'
     ? `<div class="project-meta">
-         <span class="project-badge">Project log</span>
+         <a href="/blog/?type=project" class="project-badge">Project log</a>
          ${post.project ? `<span class="project-name">${esc(post.project)}</span>` : ''}
        </div>`
-    : '';
+    : `<div class="project-meta">
+         <a href="/blog/?type=notes" class="project-badge" style="color: #a78bfa; border-color: #a78bfa;">Notes</a>
+       </div>`;
 
   const page = postTemplate
     .replaceAll('{{TITLE}}', esc(post.title))

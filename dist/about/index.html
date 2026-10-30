@@ -1,75 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About | Kevin Kipkorir</title>
-    <meta name="description" content="Bio, technical toolkit, and experience of Kevin Kipkorir.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css">
-    <script>
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
-    </script>
+    <script>const savedTheme = localStorage.getItem('theme'); if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);</script>
 </head>
-<body id="top">
-    <nav id="navbar">
-        <div class="nav-content">
-            <a href="/" class="logo"><i class="fa-solid fa-terminal"></i> Kevin<span class="logo-lastname"> Kipkorir</span></a>
-            <div class="nav-links">
-                <a href="/about/">About</a>
-                <a href="/blog/">Blog</a>
-                <a href="/projects">Projects</a>
-                <a href="/#contact" class="btn-outline">Contact</a>
-                <a href="/resume/" class="btn-outline">Resume</a>
-                <button id="theme-toggle" aria-label="Toggle Dark Mode"><i class="fa-solid fa-moon"></i></button>
+<body>
+    <canvas id="matrix-canvas"></canvas>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="/" class="brand"><i class="fa-solid fa-terminal"></i> KK</a>
+            <nav class="nav-menu">
+                <a href="/" class="nav-item"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="/about/" class="nav-item"><i class="fa-solid fa-user"></i> About</a>
+                <a href="/blog/" class="nav-item"><i class="fa-solid fa-pen-nib"></i> Blog</a>
+                <a href="/projects/" class="nav-item"><i class="fa-solid fa-folder-open"></i> Projects</a>
+                <a href="/#contact" class="nav-item"><i class="fa-solid fa-envelope"></i> Contact</a>
+                <a href="/resume/" class="nav-item"><i class="fa-solid fa-file-pdf"></i> Resume</a>
+            </nav>
+            <div class="header-actions">
+                <button id="cmd-trigger" class="icon-btn"><i class="fa-solid fa-terminal"></i> <kbd>⌘K</kbd></button>
+                <button id="terminal-trigger" class="icon-btn terminal-icon">&gt;_</button>
+                <button id="theme-toggle" class="icon-btn"><i class="fa-solid fa-moon"></i></button>
+                <button id="mobile-menu-toggle" class="icon-btn"><i class="fa-solid fa-bars"></i></button>
             </div>
-            <button id="mobile-menu-btn" aria-label="Toggle Menu"><i class="fa-solid fa-bars"></i></button>
         </div>
         <div class="mobile-nav" id="mobile-nav">
-            <a href="/about/">About</a>
-            <a href="/blog/">Blog</a>
-            <a href="/projects">Projects</a>
-            <a href="/#contact">Contact</a>
-            <a href="/resume/">Resume</a>
-            <button id="mobile-theme-toggle" aria-label="Toggle Dark Mode"><i class="fa-solid fa-moon"></i> Toggle Theme</button>
+            <a href="/"><i class="fa-solid fa-house"></i> Home</a><a href="/about/"><i class="fa-solid fa-user"></i> About</a>
+            <a href="/blog/"><i class="fa-solid fa-pen-nib"></i> Blog</a><a href="/projects/"><i class="fa-solid fa-folder-open"></i> Projects</a>
+            <a href="/#contact"><i class="fa-solid fa-envelope"></i> Contact</a><a href="/resume/"><i class="fa-solid fa-file-pdf"></i> Resume</a>
         </div>
-    </nav>
+    </header>
 
-    <main class="page">
-        <section class="section">
-            <h2 class="section-title"><span class="gradient-text">About Me</span></h2>
-            <div class="section-content">
-                <p>I recently graduated with a degree in Electrical & Electronic Engineering and gained direct industry experience monitoring live Tier-1 enterprise infrastructure at Huawei. That experience taught me firsthand how critical network stability, observability, and incident response are. It also showed me that whether you are running a telecom core, a banking database, or a cloud platform, the core requirement is always the same: zero downtime.</p>
-                <p>Currently, I hold an <strong>AWS Certified Cloud Practitioner</strong> certification and am building a strong foundation in Linux systems administration, containerization with Docker, and CI/CD pipelines. My networking foundation covers TCP/IP and UDP suites, essential services like DNS and DHCP, and hands-on exposure to VLAN configuration and basic routing. My goal is to bridge the gap between legacy telecom infrastructure and modern cloud architectures. I write about this transition in my <a href="/blog/">Blog</a>.</p>
-                <p>Here are a few technologies I've been working with recently:</p>
-                <div class="skills-grid">
-                    <div class="skill-box"><h4>Core Networking</h4><p>TCP/IP, UDP, DNS, DHCP, VLANs, Subnetting</p></div>
-                    <div class="skill-box"><h4>Routing & Switching</h4><p>BGP, OSPF, IS-IS, MPLS (Concepts)</p></div>
-                    <div class="skill-box"><h4>Network Ops & Tools</h4><p>NOC/SOC, SNMP, Wireshark, Ping/Traceroute</p></div>
-                    <div class="skill-box"><h4>Automation & Cloud</h4><p>Linux, Docker, AWS (CCP), Python, CI/CD</p></div>
-                    <div class="skill-box"><h4>Currently Exploring</h4><p>SDN, Kubernetes, Prometheus, Ansible</p></div>
+    <main class="main-wrapper">
+        <section class="section-block">
+            <h2 class="section-title">About Me</h2>
+            <div style="max-width: 800px;">
+                <p class="hero-bio">I recently graduated with a degree in Electrical & Electronic Engineering and gained direct industry experience monitoring live Tier-1 enterprise infrastructure at Huawei. That experience taught me firsthand how critical network stability, observability, and incident response are.</p>
+                <p class="hero-bio">Currently, I hold an <strong>AWS Certified Cloud Practitioner</strong> certification and am building a strong foundation in Linux systems administration, containerization with Docker, and CI/CD pipelines. My goal is to bridge the gap between legacy telecom infrastructure and modern cloud architectures.</p>
+            </div>
+        </section>
+
+        <section class="section-block">
+            <h2 class="section-title">Technical Toolkit</h2>
+            <div class="card-grid">
+                <div class="ref-card">
+                    <div class="card-header"><h3><i class="fa-solid fa-network-wired" style="color: var(--accent); margin-right: 8px;"></i> Core Networking</h3></div>
+                    <p class="card-desc">TCP/IP, UDP, DNS, DHCP, VLANs, Subnetting</p>
+                </div>
+                <div class="ref-card">
+                    <div class="card-header"><h3><i class="fa-solid fa-route" style="color: var(--accent); margin-right: 8px;"></i> Routing & Switching</h3></div>
+                    <p class="card-desc">BGP, OSPF, IS-IS, MPLS (Concepts)</p>
+                </div>
+                <div class="ref-card">
+                    <div class="card-header"><h3><i class="fa-solid fa-terminal" style="color: var(--accent); margin-right: 8px;"></i> Network Ops & Tools</h3></div>
+                    <p class="card-desc">NOC/SOC, SNMP, Wireshark, Ping/Traceroute</p>
+                </div>
+                <div class="ref-card">
+                    <div class="card-header"><h3><i class="fa-solid fa-cloud" style="color: var(--accent); margin-right: 8px;"></i> Automation & Cloud</h3></div>
+                    <p class="card-desc">Linux, Docker, AWS (CCP), Python, CI/CD</p>
                 </div>
             </div>
         </section>
 
-        <section class="section" id="experience">
-            <h2 class="section-title"><span class="gradient-text">Experience</span></h2>
-            <div class="experience-card">
-                <div class="exp-header">
+        <section class="section-block" id="experience">
+            <h2 class="section-title">Experience</h2>
+            <div class="ref-card" style="max-width: 800px;">
+                <div class="card-header">
                     <h3>Service Operations Centre (SOC) Intern</h3>
-                    <span class="exp-date">Jul 2025 - Oct 2025</span>
+                    <span style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted);">Jul 2025 - Oct 2025</span>
                 </div>
-                <h4 class="exp-company">Huawei Kenya (Safaricom Account)</h4>
-                <ul class="exp-details">
-                    <li>Delivered L1/L2 technical support for Safaricom's Tier-1 live enterprise infrastructure, ensuring high network availability.</li>
-                    <li>Analyzed data from SmartCare/SEQ monitoring platforms to identify service anomalies and generated actionable KPI/CEM reports.</li>
-                    <li>Utilized network monitoring tools and protocol analysis (SNMP, TCP/IP) to diagnose connectivity issues and escalate complex routing anomalies to senior engineers.</li>
-                    <li>Assisted in physical server installation, configuration, and incident escalation within live data center environments.</li>
-                    <li>Utilized SQL to extract network performance data, translating technical findings into clear documentation for management.</li>
+                <h4 style="color: var(--accent); margin-bottom: 15px;">Huawei Kenya (Safaricom Account)</h4>
+                <ul style="color: var(--text-muted); list-style: none; padding-left: 0;">
+                    <li style="margin-bottom: 10px; padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; color: var(--accent);">▹</span> Delivered L1/L2 technical support for Safaricom's Tier-1 live enterprise infrastructure.</li>
+                    <li style="margin-bottom: 10px; padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; color: var(--accent);">▹</span> Analyzed data from SmartCare/SEQ monitoring platforms to identify service anomalies.</li>
+                    <li style="margin-bottom: 10px; padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; color: var(--accent);">▹</span> Utilized network monitoring tools and protocol analysis to diagnose connectivity issues.</li>
                 </ul>
             </div>
         </section>
@@ -77,14 +86,31 @@
 
     <footer>
         <div class="social-links">
-            <a href="https://github.com/kevzkip" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/kevinkip" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="mailto:kevinlangat12490@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            <a href="https://github.com/kevzkip" target="_blank"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/kevinkip" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="mailto:kevinlangat12490@gmail.com"><i class="fa-solid fa-envelope"></i></a>
         </div>
-        <p class="copyright">&copy; 2026 Kevin Kipkorir. All rights reserved.</p>
+        <p class="copyright">&copy; 2026 Kevin Kipkorir.</p>
     </footer>
 
-    <a href="#top" class="back-to-top" id="back-to-top" aria-label="Back to Top"><i class="fa-solid fa-arrow-up"></i></a>
+    <div id="cmd-modal" class="modal-overlay">
+        <div class="cmd-palette-card">
+            <div class="cmd-search-wrap"><i class="fa-solid fa-magnifying-glass" style="color: var(--text-muted);"></i><input type="text" id="cmd-input" placeholder="Type a command or search..." autocomplete="off"><kbd style="font-size: 0.7rem; color: var(--text-muted); border: 1px solid var(--border-color); padding: 2px 6px; border-radius: 4px;">ESC</kbd></div>
+            <div class="cmd-results-list">
+                <a href="/about/" class="cmd-item"><i class="fa-solid fa-user"></i><span class="cmd-item-title">Go to About</span><span class="cmd-item-tag">Page</span></a>
+                <a href="/blog/" class="cmd-item"><i class="fa-solid fa-pen-nib"></i><span class="cmd-item-title">Read the Blog</span><span class="cmd-item-tag">Page</span></a>
+                <a href="/projects/" class="cmd-item"><i class="fa-solid fa-folder-open"></i><span class="cmd-item-title">View All Projects</span><span class="cmd-item-tag">Page</span></a>
+                <a href="/resume/" class="cmd-item"><i class="fa-solid fa-file-pdf"></i><span class="cmd-item-title">View Resume</span><span class="cmd-item-tag">PDF</span></a>
+            </div>
+        </div>
+    </div>
+    <div id="terminal-modal" class="modal-overlay">
+        <div class="terminal-card">
+            <div class="terminal-header"><div class="term-dot term-close" id="term-close-btn"></div><div class="term-dot term-min"></div><div class="term-dot term-max"></div><div class="term-title">guest@kk: ~</div></div>
+            <div class="terminal-body" id="terminal-output"><div>Welcome to Kevin's Terminal.</div><div>Type <span style="color:#fff">'help'</span> to begin.</div><br></div>
+            <div class="terminal-input-line"><span class="terminal-prompt">guest@kk:~$</span><input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false"></div>
+        </div>
+    </div>
     <script src="/script.js"></script>
 </body>
 </html>

@@ -3,142 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kevin Kipkorir | Network Operations & Cloud Infrastructure</title>
-    <meta name="description" content="Portfolio of Kevin Kipkorir, a recent Electrical & Electronic Engineering graduate specializing in Network Operations and Cloud Infrastructure.">
-
+    <title>Kevin Kipkorir | Network Operations</title>
+    <meta name="description" content="Portfolio of Kevin Kipkorir.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-
-    <script>
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
-    </script>
+    <script>const savedTheme = localStorage.getItem('theme'); if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);</script>
 </head>
-<body id="top">
+<body>
+    <canvas id="matrix-canvas"></canvas>
 
-    <nav id="navbar">
-        <div class="nav-content">
-            <a href="/" class="logo"><i class="fa-solid fa-terminal"></i> Kevin<span class="logo-lastname"> Kipkorir</span></a>
-            <div class="nav-links">
-                <a href="/about/">About</a>
-                <a href="/blog/">Blog</a>
-                <a href="/projects">Projects</a>
-                <a href="/#contact" class="btn-outline">Contact</a>
-                <a href="/resume/" class="btn-outline">Resume</a>
-                <button id="theme-toggle" aria-label="Toggle Dark Mode"><i class="fa-solid fa-moon"></i></button>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="/" class="brand"><i class="fa-solid fa-terminal"></i> KK</a>
+            
+            <nav class="nav-menu">
+                <a href="/" class="nav-item"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="/about/" class="nav-item"><i class="fa-solid fa-user"></i> About</a>
+                <a href="/blog/" class="nav-item"><i class="fa-solid fa-pen-nib"></i> Blog</a>
+                <a href="/projects/" class="nav-item"><i class="fa-solid fa-folder-open"></i> Projects</a>
+                <a href="/#contact" class="nav-item"><i class="fa-solid fa-envelope"></i> Contact</a>
+                <a href="/resume/" class="nav-item"><i class="fa-solid fa-file-pdf"></i> Resume</a>
+            </nav>
+
+            <div class="header-actions">
+                <button id="cmd-trigger" class="icon-btn" title="Command Palette (Ctrl+K)"><i class="fa-solid fa-terminal"></i> <kbd>⌘K</kbd></button>
+                <button id="terminal-trigger" class="icon-btn terminal-icon" title="Open Terminal">&gt;_</button>
+                <button id="theme-toggle" class="icon-btn" aria-label="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
+                <button id="mobile-menu-toggle" class="icon-btn"><i class="fa-solid fa-bars"></i></button>
             </div>
-            <button id="mobile-menu-btn" aria-label="Toggle Menu"><i class="fa-solid fa-bars"></i></button>
         </div>
         <div class="mobile-nav" id="mobile-nav">
-            <a href="/about/">About</a>
-            <a href="/blog/">Blog</a>
-            <a href="/projects">Projects</a>
-            <a href="/#contact">Contact</a>
-            <a href="/resume/">Resume</a>
-            <button id="mobile-theme-toggle" aria-label="Toggle Dark Mode"><i class="fa-solid fa-moon"></i> Toggle Theme</button>
+            <a href="/"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="/about/"><i class="fa-solid fa-user"></i> About</a>
+            <a href="/blog/"><i class="fa-solid fa-pen-nib"></i> Blog</a>
+            <a href="/projects/"><i class="fa-solid fa-folder-open"></i> Projects</a>
+            <a href="/#contact"><i class="fa-solid fa-envelope"></i> Contact</a>
+            <a href="/resume/"><i class="fa-solid fa-file-pdf"></i> Resume</a>
         </div>
-    </nav>
+    </header>
 
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1 class="greeting">Hi, I'm</h1>
-            <h1 class="name">Kevin Kipkorir</h1>
-            <h2 class="title">Network Operations & Infrastructure.</h2>
-            <p class="summary">
-                I am a recent <strong>Electrical & Electronic Engineering graduate</strong> with hands-on experience in Tier-1 Network Operations. I am working towards ensuring high availability in live production environments. As the industry shifts towards Software-Defined Networking (SDN) and Cloud-Native architecture, I am leveraging Linux, Python, and Containerization tools to manage the next generation of scalable systems.
-            </p>
-            <div class="hero-cta">
-                <a href="/projects" class="btn-primary">View My Work</a>
-                <a href="/blog/" class="btn-secondary">Read the Blog</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="featured" class="section">
-        <h2 class="section-title"><span class="gradient-text">Featured Writing</span></h2>
-        <p class="section-subtitle">Selected Notes on infrastructure, debugging, and systems engineering.</p>
-        <div class="blog-list">
-            <!-- FEATURED:START -->
-            <!-- FEATURED:END -->
-        </div>
-        <div style="margin-top: 30px;">
-            <a href="/blog/" class="btn-secondary">Read all posts <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-    </section>
-
-    <section id="projects" class="section">
-        <h2 class="section-title"><span class="gradient-text">Projects</span></h2>
-        <div class="project-grid">
-
-            <div class="project-card">
-                <div class="project-header">
-                    <h3><i class="fa-solid fa-server project-icon"></i> Infrastructure Lab</h3>
-                    <a href="https://github.com/kevzkip/infra-lab" target="_blank" class="icon-link" aria-label="GitHub Repo"><i class="fa-brands fa-github"></i></a>
+    <main class="main-wrapper">
+        <section class="hero-section" id="about">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h1 class="hero-name">Kevin Kipkorir</h1>
+                    <h2 class="hero-headline">Network Operations & Cloud Infrastructure <span>— AWS Certified</span></h2>
+                    <p class="hero-bio">
+                        I am a recent <strong>Electrical & Electronic Engineering graduate</strong> with hands-on experience in Tier-1 Network Operations at Huawei. I am bridging the gap between legacy telecom infrastructure and modern cloud architectures using 
+                        <span class="inline-pill"><span class="pill-dot dot-linux"></span>Linux</span>, 
+                        <span class="inline-pill"><span class="pill-dot dot-docker"></span>Docker</span>, and 
+                        <span class="inline-pill"><span class="pill-dot dot-aws"></span>AWS</span>.
+                    </p>
+                    <div style="display: flex; gap: 15px;">
+                        <a href="/projects/" class="btn-primary"><i class="fa-solid fa-terminal"></i> View Projects</a>
+                        <a href="/blog/" class="btn-secondary"><i class="fa-solid fa-book-open"></i> Read Blog</a>
+                    </div>
                 </div>
-                <p class="project-desc">
-                    An engineering log and documentation platform built to practice modern CI/CD and containerization. I use this lab to apply DevOps concepts (Docker, GitHub Actions, Linux) to real-world scenarios, ensuring infrastructure is deployed consistently and reliably.
-                </p>
-                <div class="project-tech">
-                    <span>Docker</span>
-                    <span>GitHub Actions</span>
-                    <span>Linux</span>
-                </div>
-                <div class="project-links">
-                    <a href="https://github.com/kevzkip/infra-lab" target="_blank">View repo <i class="fa-solid fa-arrow-right"></i></a>
-                    <a href="/blog/?project=infra-lab">Read the write-ups <i class="fa-solid fa-arrow-right"></i></a>
+                <div class="hero-image-container">
+                    <img src="/about/profile.jpg" alt="Kevin Kipkorir" class="profile-img">
                 </div>
             </div>
+        </section>
 
-            <div class="project-card">
-                <div class="project-header">
-                    <h3><i class="fa-solid fa-microchip project-icon"></i> LoRa Smart Irrigation</h3>
+        <section class="section-block" id="featured">
+            <h2 class="section-title">Featured Writing</h2>
+            <div class="blog-list">
+                <!-- FEATURED:START -->
+                <!-- FEATURED:END -->
+            </div>
+            <div style="margin-top: 30px;">
+                <a href="/blog/" class="btn-secondary">Read all posts <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </section>
+
+        <section class="section-block" id="projects">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="card-grid">
+                <div class="ref-card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-server" style="color: var(--accent); margin-right: 8px;"></i> Infrastructure Lab</h3>
+                        <a href="https://github.com/kevzkip/infra-lab" target="_blank" style="color: var(--text-muted);"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                    <p class="card-desc">An engineering log and documentation platform built to practice modern CI/CD and containerization.</p>
+                    <div class="card-tags"><span>Docker</span><span>CI/CD</span><span>Linux</span></div>
+                    <div class="card-links">
+                        <a href="https://github.com/kevzkip/infra-lab" target="_blank">View Repo <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <a href="/blog/?project=infra-lab">Read Write-ups <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
                 </div>
-                <p class="project-desc">
-                    Engineered a remote sensor data transmission system using ESP32 and SX1278 LoRa modules. Achieved reliable communication up to 800m urban NLOS range for IoT-based monitoring.
-                </p>
-                <div class="project-tech">
-                    <span>ESP32</span>
-                    <span>C++</span>
-                    <span>LoRa</span>
-                    <span>IoT</span>
-                </div>
-                <div class="project-links">
-                    <a href="/blog/?project=lora-irrigation">Read the write-ups <i class="fa-solid fa-arrow-right"></i></a>
+                <div class="ref-card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-microchip" style="color: var(--accent); margin-right: 8px;"></i> LoRa Smart Irrigation</h3>
+                    </div>
+                    <p class="card-desc">Engineered a remote sensor data transmission system using ESP32 and SX1278 LoRa modules.</p>
+                    <div class="card-tags"><span>ESP32</span><span>C++</span><span>IoT</span></div>
+                    <div class="card-links">
+                        <a href="/blog/?project=lora-irrigation">Read Write-ups <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
                 </div>
             </div>
+            <div style="margin-top: 30px;">
+                <a href="/projects/" class="btn-secondary">View all projects <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </section>
 
-        </div>
-        <div style="margin-top: 40px;">
-            <a href="/projects/" class="btn-secondary">View all projects <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-    </section>
-
-    <section id="contact" class="section">
-        <h2 class="section-title"><span class="gradient-text">Get In Touch</span></h2>
-        <p class="section-subtitle">I'm currently seeking internship or entry-level opportunities in Network Operations (NOC), Telecommunications, Cloud Infrastructure Support, or Systems Administration. Send a message, my inbox is always open.</p>
-
-        <form id="contact-form" action="https://formspree.io/f/xgvanrne" method="POST" class="contact-form">
-            <div class="form-group"><input type="text" name="name" placeholder="Your Name" required></div>
-            <div class="form-group"><input type="email" name="email" placeholder="Your Email" required></div>
-            <div class="form-group"><textarea name="message" placeholder="Your Message" rows="5" required></textarea></div>
-            <button type="submit" class="btn-primary">Send Message</button>
-            <p id="form-status"></p>
-        </form>
-    </section>
+        <section class="section-block" id="contact">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-text">
+                    <h3>I'm currently looking for new opportunities.</h3>
+                    <p>Whether you have a question about my projects, want to discuss network operations, or just want to say hi, I'll try my best to get back to you!</p>
+                </div>
+                <form id="contact-form" action="https://formspree.io/f/xgvanrne" method="POST" class="contact-form">
+                    <input type="text" name="name" placeholder="Your Name" required class="form-input">
+                    <input type="email" name="email" placeholder="Your Email" required class="form-input">
+                    <textarea name="message" placeholder="Your Message" rows="5" required class="form-input"></textarea>
+                    <button type="submit" class="btn-primary" style="align-self: flex-start;">Send Message</button>
+                    <p id="form-status" style="font-family: var(--font-mono); font-size: 0.9rem; color: var(--accent);"></p>
+                </form>
+            </div>
+        </section>
+    </main>
 
     <footer>
         <div class="social-links">
-            <a href="https://github.com/kevzkip" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/kevinkip" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="mailto:kevinlangat12490@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            <a href="https://github.com/kevzkip" target="_blank"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/kevinkip" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="mailto:kevinlangat12490@gmail.com"><i class="fa-solid fa-envelope"></i></a>
         </div>
-        <p class="copyright">&copy; 2026 Kevin Kipkorir. All rights reserved.</p>
+        <p class="copyright">&copy; 2026 Kevin Kipkorir.</p>
     </footer>
 
-    <a href="#top" class="back-to-top" id="back-to-top" aria-label="Back to Top"><i class="fa-solid fa-arrow-up"></i></a>
+    <a href="#top" id="back-to-top" style="position: fixed; bottom: 30px; right: 30px; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-main); width: 40px; height: 40px; border-radius: 50%; display: flex; justify-content: center; align-items: center; transition: 0.3s; z-index: 99;"><i class="fa-solid fa-arrow-up"></i></a>
+
+    <!-- Modals -->
+    <div id="cmd-modal" class="modal-overlay">
+        <div class="cmd-palette-card">
+            <div class="cmd-search-wrap">
+                <i class="fa-solid fa-magnifying-glass" style="color: var(--text-muted);"></i>
+                <input type="text" id="cmd-input" placeholder="Type a command or search..." autocomplete="off">
+                <kbd style="font-size: 0.7rem; color: var(--text-muted); border: 1px solid var(--border-color); padding: 2px 6px; border-radius: 4px;">ESC</kbd>
+            </div>
+            <div class="cmd-results-list">
+                <a href="/about/" class="cmd-item"><i class="fa-solid fa-user"></i><span class="cmd-item-title">Go to About</span><span class="cmd-item-tag">Page</span></a>
+                <a href="/blog/" class="cmd-item"><i class="fa-solid fa-pen-nib"></i><span class="cmd-item-title">Read the Blog</span><span class="cmd-item-tag">Page</span></a>
+                <a href="/projects/" class="cmd-item"><i class="fa-solid fa-folder-open"></i><span class="cmd-item-title">View All Projects</span><span class="cmd-item-tag">Page</span></a>
+                <a href="/resume/" class="cmd-item"><i class="fa-solid fa-file-pdf"></i><span class="cmd-item-title">View Resume</span><span class="cmd-item-tag">PDF</span></a>
+                <a href="https://github.com/kevzkip" target="_blank" class="cmd-item"><i class="fa-brands fa-github"></i><span class="cmd-item-title">Open GitHub Profile</span><span class="cmd-item-tag">External</span></a>
+            </div>
+        </div>
+    </div>
+
+    <div id="terminal-modal" class="modal-overlay">
+        <div class="terminal-card">
+            <div class="terminal-header">
+                <div class="term-dot term-close" id="term-close-btn"></div>
+                <div class="term-dot term-min"></div><div class="term-dot term-max"></div>
+                <div class="term-title">guest@kk: ~</div>
+            </div>
+            <div class="terminal-body" id="terminal-output">
+                <div>Welcome to Kevin's Terminal.</div><div>Type <span style="color:#fff">'help'</span> to begin.</div><br>
+            </div>
+            <div class="terminal-input-line">
+                <span class="terminal-prompt">guest@kk:~$</span>
+                <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false">
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

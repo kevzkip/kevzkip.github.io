@@ -1,239 +1,312 @@
-// --- THEME ---
-const htmlElement = document.documentElement;
+document.addEventListener('DOMContentLoaded', () => {
+    const html = document.documentElement;
 
-function updateThemeIcons(theme) {
-  document.querySelectorAll('#theme-toggle i, #mobile-theme-toggle i').forEach((icon) => {
-    if (theme === 'light') { icon.classList.remove('fa-moon'); icon.classList.add('fa-sun'); }
-    else { icon.classList.remove('fa-sun'); icon.classList.add('fa-moon'); }
-  });
-}
+    // Theme Toggle
+    const themeBtn = document.getElementById('theme-toggle');
+    const sunSvg = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+    const moonSvg = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
 
-if (htmlElement.getAttribute('data-theme') === 'light') updateThemeIcons('light');
-
-function toggleTheme() {
-  const isLight = htmlElement.getAttribute('data-theme') === 'light';
-  if (isLight) {
-    htmlElement.removeAttribute('data-theme');
-    localStorage.setItem('theme', 'dark');
-    updateThemeIcons('dark');
-  } else {
-    htmlElement.setAttribute('data-theme', 'light');
-    localStorage.setItem('theme', 'light');
-    updateThemeIcons('light');
-  }
-}
-
-document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
-document.getElementById('mobile-theme-toggle')?.addEventListener('click', toggleTheme);
-
-// --- MOBILE MENU ---
-const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-const mobileNav = document.getElementById('mobile-nav');
-
-if (mobileMenuBtn && mobileNav) {
-  const mobileIcon = mobileMenuBtn.querySelector('i');
-  mobileMenuBtn.addEventListener('click', () => {
-    const open = mobileNav.style.display === 'flex';
-    mobileNav.style.display = open ? 'none' : 'flex';
-    mobileIcon.classList.replace(open ? 'fa-xmark' : 'fa-bars', open ? 'fa-bars' : 'fa-xmark');
-  });
-  mobileNav.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      mobileNav.style.display = 'none';
-      mobileIcon.classList.replace('fa-xmark', 'fa-bars');
-    });
-  });
-}
-
-// --- NAV ACTIVE STATE ---
-const currentPath = window.location.pathname;
-document.querySelectorAll('.nav-links a, .mobile-nav a').forEach((link) => {
-  const href = link.getAttribute('href');
-  if (!href || !href.startsWith('/') || href.includes('#')) return;
-  if (href === currentPath || (href !== '/' && currentPath.startsWith(href))) {
-    link.classList.add('active');
-  }
-});
-
-// --- BACK TO TOP ---
-const backToTopBtn = document.getElementById('back-to-top');
-if (backToTopBtn) {
-  window.addEventListener('scroll', () => {
-    backToTopBtn.classList.toggle('show', window.scrollY > 500);
-  });
-}
-
-// --- FORMSPREE ---
-const form = document.getElementById('contact-form');
-const formStatus = document.getElementById('form-status');
-
-if (form && formStatus) {
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const data = new FormData(form);
-    formStatus.textContent = 'Sending...';
-    try {
-      const response = await fetch(form.action, {
-        method: 'POST',
-        body: data,
-        headers: { Accept: 'application/json' },
-      });
-      if (response.ok) {
-        formStatus.textContent = 'Message sent successfully!';
-        form.reset();
-      } else {
-        formStatus.textContent = 'Oops! There was a problem submitting your form.';
-      }
-    } catch {
-      formStatus.textContent = 'Network error. Please try again later.';
-    }
-  });
-}
-
-// --- BLOG FILTER ---
-const filterBar = document.getElementById('filter-bar');
-const postList = document.getElementById('post-list');
-
-if (filterBar && postList) {
-  const applyFilter = () => {
-    const params = new URLSearchParams(window.location.search);
-    const type = params.get('type');
-    const project = params.get('project');
-
-    filterBar.querySelectorAll('.filter-btn').forEach((btn) => {
-      btn.classList.remove('active');
-      const f = btn.dataset.filter;
-      if (!type && !project && f === 'all') btn.classList.add('active');
-      else if (type === f) btn.classList.add('active');
-      else if (project && f === 'project') btn.classList.add('active');
-    });
-
-    postList.querySelectorAll('.blog-item[data-type]').forEach((item) => {
-      let show = true;
-      if (type && item.dataset.type !== type) show = false;
-      if (project && item.dataset.project !== project) show = false;
-      item.style.display = show ? '' : 'none';
-    });
-  };
-
-  filterBar.querySelectorAll('.filter-btn').forEach((btn) => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const url = new URL(window.location);
-      const f = btn.dataset.filter;
-      url.searchParams.delete('project');
-      if (f === 'all') url.searchParams.delete('type');
-      else url.searchParams.set('type', f);
-      window.history.pushState({}, '', url);
-      applyFilter();
-    });
-  });
-
-  applyFilter();
-}
-// --- BLOG POST: PROGRESS BAR & TOC ---
-const progressBar = document.getElementById('reading-progress');
-const postBody = document.querySelector('.post-body');
-const tocList = document.getElementById('toc-list');
-
-if (postBody && progressBar) {
-    
-    // 1. Progress Bar Logic
-    window.addEventListener('scroll', () => {
-        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (winScroll / height) * 100;
-        progressBar.style.width = scrolled + "%";
-    });
-
-    // 2. Build TOC Logic (Only runs if the sidebar exists on the page)
-    if (tocList) {
-        const headings = postBody.querySelectorAll('h2, h3');
+    if (themeBtn) {
+        if (html.getAttribute('data-theme') === 'light') themeBtn.innerHTML = sunSvg;
         
-        headings.forEach((heading, index) => {
-            // Give each heading an ID if it doesn't have one
-            if (!heading.id) {
-                heading.id = `section-${index}`;
+        themeBtn.addEventListener('click', () => {
+            const isLight = html.getAttribute('data-theme') === 'light';
+            if (isLight) {
+                html.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'dark');
+                themeBtn.innerHTML = moonSvg;
+                startMatrix();
+            } else {
+                html.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+                themeBtn.innerHTML = sunSvg;
+                stopMatrix();
             }
+        });
+    }
 
-            // Create the list item
-            const li = document.createElement('li');
-            const a = document.createElement('a');
+    // Matrix Rain
+    const canvas = document.getElementById('matrix-canvas');
+    let matrixInterval;
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+'.split('');
+        const fontSize = 16;
+        const columnSpacing = fontSize * 3; // Spread columns out by 3x
+        let columns, drops;
+
+        const resizeCanvas = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            columns = canvas.width / columnSpacing; // Much fewer columns
+            drops = [];
+            for (let x = 0; x < columns; x++) drops[x] = 1;
+        };
+
+        const drawMatrix = () => {
+            ctx.fillStyle = 'rgba(9, 9, 11, 0.08)'; // Slightly faster trail fade
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#46b66f';
+            ctx.font = fontSize + 'px monospace';
             
-            a.href = `#${heading.id}`;
-            a.textContent = heading.textContent;
-            
-            // Add class for h3s to handle indentation via CSS
-            if (heading.tagName.toLowerCase() === 'h3') {
-                li.classList.add('toc-h3');
+            for (let i = 0; i < drops.length; i++) {
+                // Randomly skip drawing to create gaps
+                if (Math.random() > 0.3) {
+                    const text = chars[Math.floor(Math.random() * chars.length)];
+                    ctx.fillText(text, i * columnSpacing, drops[i] * fontSize);
+                }
+                
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
             }
+        };
 
-            li.appendChild(a);
-            tocList.appendChild(li);
+        const startMatrix = () => {
+            stopMatrix();
+            resizeCanvas();
+            matrixInterval = setInterval(drawMatrix, 130); // Slower speed (was 90)
+        };
+
+        const stopMatrix = () => {
+            clearInterval(matrixInterval);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        };
+
+        window.addEventListener('resize', () => {
+            if (html.getAttribute('data-theme') !== 'light') resizeCanvas();
         });
 
-        // 3. Highlight Active TOC Item on Scroll
-        const tocLinks = tocList.querySelectorAll('li');
-        
+        if (html.getAttribute('data-theme') !== 'light') startMatrix();
+    }
+
+    // Mobile Menu
+    const mobileBtn = document.getElementById('mobile-menu-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+    if (mobileBtn && mobileNav) {
+        mobileBtn.addEventListener('click', () => {
+            mobileNav.style.display = mobileNav.style.display === 'flex' ? 'none' : 'flex';
+        });
+    }
+
+    // Active Nav State
+    const currentPath = window.location.pathname;
+    document.querySelectorAll('.nav-menu a, .mobile-nav a').forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === currentPath || (href !== '/' && currentPath.startsWith(href))) {
+            link.classList.add('active');
+        }
+    });
+
+    // Command Palette
+    const cmdModal = document.getElementById('cmd-modal');
+    const cmdInput = document.getElementById('cmd-input');
+    const cmdItems = document.querySelectorAll('.cmd-item');
+
+    const toggleCmd = () => {
+        if (!cmdModal) return;
+        const isActive = cmdModal.classList.contains('active');
+        if (isActive) {
+            cmdModal.classList.remove('active');
+            cmdInput.value = '';
+            cmdItems.forEach(item => item.style.display = 'flex');
+        } else {
+            cmdModal.classList.add('active');
+            setTimeout(() => cmdInput.focus(), 100);
+        }
+    };
+    if (cmdModal) {
+        cmdModal.addEventListener('click', (e) => {
+            if (e.target === cmdModal) toggleCmd();
+        });
+    }
+    document.getElementById('cmd-trigger')?.addEventListener('click', toggleCmd);
+    document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); toggleCmd(); }
+        if (e.key === 'Escape' && cmdModal?.classList.contains('active')) toggleCmd();
+    });
+
+    if (cmdInput) {
+        cmdInput.addEventListener('input', (e) => {
+            const val = e.target.value.toLowerCase();
+            cmdItems.forEach(item => {
+                item.style.display = item.textContent.toLowerCase().includes(val) ? 'flex' : 'none';
+            });
+        });
+        cmdInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const first = Array.from(cmdItems).find(i => i.style.display !== 'none');
+                if (first) first.click();
+            }
+        });
+        cmdItems.forEach(item => item.addEventListener('click', toggleCmd));
+    }
+
+    // Terminal
+    const termModal = document.getElementById('terminal-modal');
+    const termInput = document.getElementById('terminal-input');
+    const termOutput = document.getElementById('terminal-output');
+
+    const toggleTerm = () => {
+        if (!termModal) return;
+        if (termModal.classList.contains('active')) {
+            termModal.classList.remove('active');
+        } else {
+            termModal.classList.add('active');
+            setTimeout(() => termInput.focus(), 100);
+        }
+    };
+    if (termModal) {
+        termModal.addEventListener('click', (e) => {
+            if (e.target === termModal) toggleTerm();
+        });
+    }
+
+    document.getElementById('terminal-trigger')?.addEventListener('click', toggleTerm);
+    document.getElementById('term-close-btn')?.addEventListener('click', toggleTerm);
+
+    if (termInput) {
+        termInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const cmd = e.target.value.trim().toLowerCase();
+                e.target.value = '';
+                termOutput.innerHTML += `<div><span class="terminal-prompt">guest@kk:~$</span> ${cmd}</div>`;
+                switch (cmd) {
+                    case 'help': termOutput.innerHTML += `<div>Commands: help, whoami, neofetch, clear, exit</div>`; break;
+                    case 'whoami': termOutput.innerHTML += `<div>Kevin Kipkorir. Network Operations & Cloud Infrastructure.</div>`; break;
+                    case 'neofetch': termOutput.innerHTML += `<div style="color:var(--accent)">OS: Arch Linux<br>Shell: zsh<br>Role: NOC / Cloud Engineer<br>Skills: Linux, Docker, AWS, Python</div>`; break;
+                    case 'clear': termOutput.innerHTML = ''; break;
+                    case 'exit': toggleTerm(); break;
+                    default: if (cmd) termOutput.innerHTML += `<div>Command not found: ${cmd}</div>`;
+                }
+                termOutput.scrollTop = termOutput.scrollHeight;
+            }
+        });
+    }
+
+    // Blog Filter
+    const filterBar = document.getElementById('filter-bar');
+    const postList = document.getElementById('post-list');
+    if (filterBar && postList) {
+        const applyFilter = () => {
+            const params = new URLSearchParams(window.location.search);
+            const type = params.get('type');
+            const project = params.get('project');
+            const tag = params.get('tag');
+
+            filterBar.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                const f = btn.dataset.filter;
+                if (!type && !project && !tag && f === 'all') btn.classList.add('active');
+                else if (type === f) btn.classList.add('active');
+                else if (project && f === 'project') btn.classList.add('active');
+            });
+
+            postList.querySelectorAll('.blog-item[data-type]').forEach(item => {
+                let show = true;
+                if (type && item.dataset.type.toLowerCase() !== type.toLowerCase()) show = false;
+                if (project && item.dataset.project !== project) show = false;
+                if (tag) {
+                    const tags = item.dataset.tags ? item.dataset.tags.split(',') : [];
+                    if (!tags.includes(tag)) show = false;
+                }
+                item.style.display = show ? '' : 'none';
+            });
+        };
+
+        filterBar.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const url = new URL(window.location);
+                const f = btn.dataset.filter;
+                url.searchParams.delete('project');
+                url.searchParams.delete('tag');
+                if (f === 'all') url.searchParams.delete('type');
+                else url.searchParams.set('type', f);
+                window.history.pushState({}, '', url);
+                applyFilter();
+            });
+        });
+
+        window.addEventListener('popstate', applyFilter);
+        applyFilter();
+    }
+
+    // Reading Progress & TOC
+    const progressBar = document.getElementById('reading-progress');
+    const postBody = document.querySelector('.post-body');
+    const tocList = document.getElementById('toc-list');
+
+    if (postBody && progressBar) {
         window.addEventListener('scroll', () => {
-            let current = '';
-            
-            headings.forEach(heading => {
-                const headingTop = heading.offsetTop;
-                // If we've scrolled past the heading (minus 120px for the fixed nav)
-                if (window.scrollY >= headingTop - 120) {
-                    current = heading.id;
-                }
+            const scroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            progressBar.style.width = (scroll / height) * 100 + "%";
+        });
+
+        if (tocList) {
+            const headings = postBody.querySelectorAll('h2, h3');
+            headings.forEach((h, i) => {
+                if (!h.id) h.id = `section-${i}`;
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = `#${h.id}`;
+                a.textContent = h.textContent;
+                if (h.tagName.toLowerCase() === 'h3') li.classList.add('toc-h3');
+                li.appendChild(a);
+                tocList.appendChild(li);
             });
 
-            tocLinks.forEach(li => {
-                li.classList.remove('active');
-                const link = li.querySelector('a');
-                if (link && link.getAttribute('href') === `#${current}`) {
-                    li.classList.add('active');
-                }
+            const tocLinks = tocList.querySelectorAll('li');
+            window.addEventListener('scroll', () => {
+                let current = '';
+                headings.forEach(h => {
+                    if (window.scrollY >= h.offsetTop - 120) current = h.id;
+                });
+                tocLinks.forEach(li => {
+                    li.classList.remove('active');
+                    if (li.querySelector('a').getAttribute('href') === `#${current}`) li.classList.add('active');
+                });
             });
+        }
+    }
+
+    // Copy Code
+    if (postBody) {
+        postBody.querySelectorAll('pre').forEach(pre => {
+            const btn = document.createElement('button');
+            btn.className = 'copy-code-btn';
+            btn.innerText = 'Copy';
+            btn.addEventListener('click', async () => {
+                await navigator.clipboard.writeText(pre.querySelector('code').innerText);
+                btn.innerText = 'Copied!';
+                btn.classList.add('copied');
+                setTimeout(() => { btn.innerText = 'Copy'; btn.classList.remove('copied'); }, 2000);
+            });
+            pre.appendChild(btn);
         });
     }
-}
 
-// --- BLOG POST: COPY CODE BUTTON ---
-const postContent = document.querySelector('.post-body');
-
-if (postContent) {
-    // Find all pre blocks (code blocks) inside the post
-    const codeBlocks = postContent.querySelectorAll('pre');
-    
-    codeBlocks.forEach((pre) => {
-        // Create the button
-        const copyBtn = document.createElement('button');
-        copyBtn.className = 'copy-code-btn';
-        copyBtn.innerText = 'Copy';
-        
-        // Add click event to copy text
-        copyBtn.addEventListener('click', async () => {
-            // Get the actual code text
-            const code = pre.querySelector('code').innerText;
-            
-            try {
-                await navigator.clipboard.writeText(code);
-                
-                // Visual feedback
-                copyBtn.innerText = 'Copied!';
-                copyBtn.classList.add('copied');
-                
-                // Reset after 2 seconds
-                setTimeout(() => {
-                    copyBtn.innerText = 'Copy';
-                    copyBtn.classList.remove('copied');
-                }, 2000);
-            } catch (err) {
-                console.error('Failed to copy text: ', err);
-                copyBtn.innerText = 'Failed';
-            }
+    // Back to Top
+    const backTop = document.getElementById('back-to-top');
+    if (backTop) {
+        window.addEventListener('scroll', () => {
+            backTop.style.opacity = window.scrollY > 500 ? '1' : '0';
+            backTop.style.visibility = window.scrollY > 500 ? 'visible' : 'hidden';
         });
-        
-        // Inject the button into the pre block
-        pre.appendChild(copyBtn);
-    });
-}
+    }
+
+    // Formspree
+    const form = document.getElementById('contact-form');
+    const formStatus = document.getElementById('form-status');
+    if (form && formStatus) {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            formStatus.textContent = 'Sending...';
+            try {
+                const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
+                if (res.ok) { formStatus.textContent = 'Message sent successfully!'; form.reset(); }
+                else formStatus.textContent = 'Oops! There was a problem.';
+            } catch { formStatus.textContent = 'Network error.'; }
+        });
+    }
+});
